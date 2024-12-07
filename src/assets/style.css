@@ -5,6 +5,7 @@
    align-items: center;
    justify-content: center;
    flex-direction: column;
+   gap: 10px;
 }
 .username{
     width: 300px;
@@ -14,6 +15,5 @@
 }
 .btn{
     width: 100px;
-   margin-right: 180px !important;
-
+   margin-right: 270px !important;
 }

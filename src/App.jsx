@@ -17,20 +17,33 @@ const App = () => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off" className="form">
-      <Form.Item placeholder="username" name="username" rules={[
+      <Form.Item placeholder="username" label="Username" name="username" rules={[
           {
             required: true,
             message: "Please input your username!",
           },
+          {
+            min: 5,
+            message: "Username must be at least 5 characters long!",
+          },
         ]}>
         <Input className="username" placeholder="Enter your Username" />
       </Form.Item>
-      <Form.Item
+      <Form.Item 
+      label="Password"
         name="password" 
         rules={[
-          {
+          { 
             required: true,
             message: "Please input your password!",
+          },
+          {
+            min: 5,
+            message: "Username must be at least 5 characters long!",
+          },
+          {
+            pattern: /^[A-Z].*$/,
+            message: "Password must start with an uppercase letter!",
           },
         ]}
       >
