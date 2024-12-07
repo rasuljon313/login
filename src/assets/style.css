@@ -1,0 +1,19 @@
+.form{
+   min-width: 100%;
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+}
+.username{
+    width: 300px;
+}
+.password{
+    width: 300px;
+}
+.btn{
+    width: 100px;
+   margin-right: 180px !important;
+
+}
