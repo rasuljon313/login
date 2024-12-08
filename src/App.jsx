@@ -29,10 +29,7 @@ const App = () => {
         ]}>
         <Input className="username" placeholder="Enter your Username" />
       </Form.Item>
-      <Form.Item 
-      label="Password"
-        name="password" 
-        rules={[
+      <Form.Item label="Password" name="password" rules={[
           { 
             required: true,
             message: "Please input your password!",
@@ -40,11 +37,7 @@ const App = () => {
           {
             min: 5,
             message: "Username must be at least 5 characters long!",
-          },
-          {
-            pattern: /^[A-Z].*$/,
-            message: "Password must start with an uppercase letter!",
-          },
+          }
         ]}
       >
         <Input.Password className="password" placeholder="Enter your password" />
