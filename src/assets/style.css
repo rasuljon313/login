@@ -7,8 +7,9 @@
    flex-direction: column;
    gap: 10px;
 }
-.username{
+.phone{
     width: 300px;
+    margin-left: 2px;
 }
 .password{
     width: 300px;
