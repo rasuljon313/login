@@ -1,10 +1,11 @@
 import { Button, Form, Input } from "antd";
-
+import toast from "react-hot-toast";
 const App = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
     console.log("Success:", values);
+    toast.success("Muvaffaqiyatli otdingiz");
     form.resetFields();
   };
 
@@ -13,14 +14,14 @@ const App = () => {
   };
 
   return (
-    <Form form={form} name="basic" labelCol={{span: 8,}} wrapperCol={{ span: 16,}} style={{  maxWidth: 600, }} initialValues={{remember: true,}}
+    <Form form={form} name="basic" labelCol={{span: 8,}} wrapperCol={{ span: 16,}} style={{  maxWidth: 600, }} initialValues={{remember: true}}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off" className="form">
       <Form.Item placeholder="username" label="Username" name="username" rules={[
           {
             required: true,
-            message: "Please input your username!",
+            message: "Please input your username!",   
           },
           {
             min: 5,
