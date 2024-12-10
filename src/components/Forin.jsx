@@ -1,13 +1,39 @@
 import { useState } from "react";
-
+import  toast  from "react-hot-toast"
+import { useNavigate } from "react-router-dom";
 const Forinn = () => {
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-
+  const [number, setNumber] = useState('');
+  const [password, setPassword] = useState(''); 
+  const navigate = useNavigate()
   function submit(e) {
     e.preventDefault(); 
-    console.log(name);
-    console.log(password);
+
+    fetch("https://realauto.limsa.uz/api/auth/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      body: JSON.stringify({
+        phone_number: number,
+        password: password
+      })
+    })
+    .then((response) => response.json())
+    .then((element) =>
+    {
+      if(element?.message){
+        localStorage.setItem("tokenxon", element?.data?.tokens?.accessToken?.token)
+        toast.success(element?.message)
+        navigate("/home")
+      }else{
+        toast(element?.message)
+      }
+    }
+    )
+
+    // // Formani tozalash
+    // setNumber('');
+    // setPassword('');
   }
 
   return (
@@ -16,10 +42,21 @@ const Forinn = () => {
         <div className="container">
           <div className="forin_box">
             <form onSubmit={submit} className="forin_card">
-              <input  type="text"  value={name} onChange={(e) => setName(e.target.value)}  placeholder="Username"  required  />
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required 
+              <input  
+                type="text"  
+                value={number} 
+                onChange={(e) => setNumber(e.target.value)}  
+                placeholder="Username"  
+                required 
               />
-              <button  type="submit">Login</button>
+              <input 
+                type="password" 
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
+                placeholder="Password" 
+                required 
+              />
+              <button type="submit">Login</button>
             </form>
           </div>
         </div>
@@ -29,4 +66,8 @@ const Forinn = () => {
 };
 
 export default Forinn;
+
+
+
+
 
