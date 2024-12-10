@@ -1,9 +1,10 @@
-import Forin from "../components/Forin"
+import Forinn from "../components/Forin"
+
 
 const ForInInput = () => {
   return (
     <div>
-        <Forin/>
+        <Forinn/>
     </div>
   )
 }

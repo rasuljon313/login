@@ -1,20 +1,16 @@
-.form{
-   min-width: 100%;
-   height: 100vh;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   flex-direction: column;
-   gap: 10px;
-}
-.phone{
-    width: 300px;
-    margin-left: 2px;
-}
-.password{
-    width: 300px;
-}
-.btn{
-    width: 100px;
-   margin-right: 270px !important;
-}
+// .forin{
+//     &_container{
+//         max-width: 1140px;
+//         width: 100%;
+//         min-height: 100vh;
+//         margin: 0 auto;
+//         padding: 15px 0 ;
+//     }
+//     &_box{
+//         &_card{
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+//         }
+//     }
+// }
