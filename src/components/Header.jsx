@@ -25,7 +25,7 @@ const Header = () => {
   useEffect(() => {
     getCategory();
   }, []);
-
+// 
   const create=(e)=>{
     e.preventDefault()
     fetch("https://realauto.limsa.uz/api/categories",{
