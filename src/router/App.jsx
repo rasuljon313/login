@@ -5,8 +5,6 @@ import { useEffect } from "react";
 
 const App = () => {
   const tokencik = localStorage.getItem("tokenxon");
-  console.log(tokencik);
-
   const navigate = useNavigate();
 
   useEffect(() => {

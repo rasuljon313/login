@@ -20,13 +20,13 @@ const Forinn = () => {
     })
     .then((response) => response.json())
     .then((element) =>
-    {
-      if(element?.message){
+    { 
+      if(element?.success){
         localStorage.setItem("tokenxon", element?.data?.tokens?.accessToken?.token)
         toast.success(element?.message)
         navigate("/home")
       }else{
-        toast(element?.message)
+        toast.error(element?.message)
       }
     }
     )
