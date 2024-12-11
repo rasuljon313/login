@@ -5,22 +5,6 @@ const Header = () => {
   const navigate = useNavigate();
   const [category, setCategory] = useState([]);
   const [open, setOpen] = useState(false);
-
-  const logout = () => {
-    localStorage.removeItem("tokenxon");
-    navigate("/");
-  };
-
-  const getCategory = () => {
-    fetch("https://realauto.limsa.uz/api/categories")
-      .then((res) => res.json())
-      .then((element) => setCategory(element?.data))
-      .catch((error) => console.error("Error fetching categories:", error));
-  };
-
-  useEffect(() => {
-    getCategory();
-  }, []);
   const [name_en, setName_en]=useState()
   const [name_ru, setName_ru]=useState()
   const [img, setImg]=useState()
@@ -29,6 +13,19 @@ const Header = () => {
   formdata.append("name_en", name_en)
   formdata.append("name_ru", name_ru)
   formdata.append("images", img)
+  const logout = () => {
+    localStorage.removeItem("tokenxon");
+    navigate("/");
+  };
+  const getCategory = () => {
+    fetch("https://realauto.limsa.uz/api/categories")
+      .then((res) => res.json())
+      .then((element) => setCategory(element?.data))
+  };
+  useEffect(() => {
+    getCategory();
+  }, []);
+
   const create=(e)=>{
     e.preventDefault()
     fetch("https://realauto.limsa.uz/api/categories",{
