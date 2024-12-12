@@ -26,14 +26,13 @@ const Forinn = () => {
         toast.success(element?.message)
         navigate("/home")
       }else{
-        toast.error(element?.message)
+        toast.error("username or password is wrong")
       }
     }
     )
 
-    // // Formani tozalash
-    // setNumber('');
-    // setPassword('');
+    setNumber('');
+    setPassword('');
   }
 
   return (

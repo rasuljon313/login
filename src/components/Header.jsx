@@ -20,12 +20,11 @@ const Header = () => {
   const getCategory = () => {
     fetch("https://realauto.limsa.uz/api/categories")
       .then((res) => res.json())
-      .then((element) => setCategory(element?.data))
+      .then((element) => setCategory(element?.data || []))
   };
   useEffect(() => {
     getCategory();
   }, []);
-// 
   const create=(e)=>{
     e.preventDefault()
     fetch("https://realauto.limsa.uz/api/categories",{
@@ -36,10 +35,16 @@ const Header = () => {
       },
       body: formdata
     }).then((res)=>res.json())
-    .then((elem)=>console.log(elem))
+    .then((elem)=>
+     { 
+      if(elem.success) {
+        setOpen(false)
+        getCategory()
+        setName_en(''); 
+        setName_ru('');
+        setImg(null); 
+      }})
   }
-
-
 
   return (
     <div>
