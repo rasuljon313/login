@@ -30,7 +30,6 @@ const Forinn = () => {
       }
     }
     )
-
     setNumber('');
     setPassword('');
   }
