@@ -40,21 +40,21 @@ const Forinn = () => {
         <div className="container">
           <div className="forin_box">
             <form onSubmit={submit} className="forin_card">
-              <input  
+              <input  className="forin_input" 
                 type="text"  
                 value={number} 
                 onChange={(e) => setNumber(e.target.value)}  
                 placeholder="Username"  
                 required 
               />
-              <input 
+              <input className="forin_input"
                 type="password" 
                 value={password} 
                 onChange={(e) => setPassword(e.target.value)} 
                 placeholder="Password" 
                 required 
               />
-              <button type="submit">Login</button>
+              <button className="forin_btn" type="submit">Login</button>
             </form>
           </div>
         </div>
