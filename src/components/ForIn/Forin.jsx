@@ -3,11 +3,12 @@ import  toast  from "react-hot-toast"
 import { useNavigate } from "react-router-dom";
 const Forinn = () => {
   const [number, setNumber] = useState('');
-  const [password, setPassword] = useState(''); 
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
   function submit(e) {
     e.preventDefault(); 
-
+    setLoading(true);
     fetch("https://realauto.limsa.uz/api/auth/signin", {
       method: "POST",
       headers: {
@@ -30,6 +31,9 @@ const Forinn = () => {
       }
     }
     )
+    .finally(() => {
+      setLoading(false);
+    });
     setNumber('');
     setPassword('');
   }
@@ -54,7 +58,10 @@ const Forinn = () => {
                 placeholder="Password" 
                 required 
               />
-              <button className="forin_btn" type="submit">Login</button>
+              {/* <button className="forin_btn" type="submit">Login</button> */}
+              <button className="forin_btn" type="submit" disabled={loading}>
+                        {loading ? "Loading..." : "Login"}
+                      </button>
             </form>
           </div>
         </div>

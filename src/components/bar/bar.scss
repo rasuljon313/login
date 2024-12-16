@@ -1,0 +1,22 @@
+.sidebar{
+    width: 25%;
+    min-height: 100vh;
+    position: relative;
+    background: #01384D;
+    &_box{
+z-index: 999;
+position: fixed;
+    }
+    &_item{
+        padding: 10px;
+        color: #fff;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        &_link{
+      color: #fff;
+      font-size: 20px;
+        }
+    }
+}

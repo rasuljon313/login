@@ -1,0 +1,36 @@
+.forin {
+    width: 100%;
+    height: 100vh;
+    &_box {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &_card {
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: 4px 4px 20px 1px #d5d5d5; /* Gray box-shadow */
+      padding: 20px;
+      background-color: white;
+      width: 300px !important;
+    }
+    &_input{
+      width: 100% !important;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    &_btn{
+      background: #007bff !important;
+      &:disabled {
+        background-color: #dcdcdc !important;
+        cursor: not-allowed !important;
+      }
+    }
+  }

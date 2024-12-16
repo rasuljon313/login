@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "../bar/Sidebar";
 
 const Header = () => {
   const navigate = useNavigate();
   const [category, setCategory] = useState([]);
   const [open, setOpen] = useState(false);
-  const [name_en, setName_en] = useState('');
-  const [name_ru, setName_ru] = useState('');
+  const [name_en, setName_en] = useState("");
+  const [name_ru, setName_ru] = useState("");
   const [img, setImg] = useState(null);
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("tokenxon");
@@ -39,7 +40,7 @@ const Header = () => {
     fetch("https://realauto.limsa.uz/api/categories", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: formdata,
     })
@@ -48,8 +49,8 @@ const Header = () => {
         if (elem.success) {
           setOpen(false);
           getCategory();
-          setName_en('');
-          setName_ru('');
+          setName_en("");
+          setName_ru("");
           setImg(null);
         }
       })
@@ -63,35 +64,45 @@ const Header = () => {
 
   return (
     <>
+      <nav>
+        <div className="nav">
+          <div className="container">
+            <ul className="nav_list">
+              <li className="nav_item">
+                <button onClick={logout}>Logout</button>
+              </li>
+              <li className="nav_item">
+                <button onClick={() => setOpen(true)}>Open Modal</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
       <header>
         <div className="header">
-          <nav>
-            <div className="nav">
-              <div className="container">
-                <ul className="nav_list">
-                  <li className="nav_item">
-                    <button onClick={logout}>Logout</button>
-                  </li>
-                  <li className="nav_item">
-                    <button onClick={() => setOpen(true)}>Open Modal</button>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
+          <Sidebar />
           <div className="container">
             <div className="header_box">
               <ul className="header_list">
                 <li className="header_item">
                   <p>Name_en</p>
                 </li>
-                <li className="header_item"><p>Name_ru</p></li>
-                <li className="header_item"><p>Images</p></li>
+                <li className="header_item">
+                  <p>Name_ru</p>
+                </li>
+                <li className="header_item">
+                  <p>Images</p>
+                </li>
               </ul>
               {open && (
                 <div className="modal_overlay">
                   <div className="modal_content">
-                  <button className="modal_close" onClick={()=>setOpen(false)}><IoIosCloseCircleOutline/></button>
+                    <button
+                      className="modal_close"
+                      onClick={() => setOpen(false)}
+                    >
+                      <IoIosCloseCircleOutline />
+                    </button>
                     <form onSubmit={create}>
                       <h2 className="modal_title">Add Category</h2>
                       <input
