@@ -62,6 +62,20 @@ const Header = () => {
       });
   };
 
+  const deleteCategory = (id) => {
+    fetch(`https://realauto.limsa.uz/api/categories/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then((res) => res.json())
+      .then((item) => 
+       { if (item.success) {
+        getCategory();
+      }}
+      )
+  }
   return (
     <>
       <nav>
@@ -145,6 +159,7 @@ const Header = () => {
                         alt={`Image for ${item?.name_en}`}
                       />
                     </div>
+                    <div className="btn" onClick={()=>deleteCategory(item?.id)}>delate</div>
                   </section>
                 ))}
               </div>
