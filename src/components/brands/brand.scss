@@ -1,0 +1,26 @@
+.brand{
+    display: flex;
+    height: calc(100vh - 10vh);
+    &_box{
+        height: 85vh;
+        overflow-x: scroll;
+        margin-top: 15px;
+        border-right: 1px solid #000;
+        border-left: 1px solid #000;
+    }
+    &_list{
+        display: flex;
+            justify-content: space-evenly;
+            background-color: #01384d;
+            padding: 10px;
+    }
+   &_item{
+    width: 200px;
+    font-size: 14px;
+    padding: 10px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+}

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { IoPencil } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "../bar/Sidebar";
+import { ImBin } from "react-icons/im";
 
 const Brands = () => {
   const token = localStorage.getItem("tokenxon");
@@ -9,13 +12,26 @@ const Brands = () => {
   const [category, setCategory] = useState([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null); // State to handle errors
+  const [error, setError] = useState(null);
+  const [editBrandId, setEditBrandId] = useState(null); 
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [brandToDelete, setBrandToDelete] = useState(null);
+  const [brandTitleToDelete, setBrandTitleToDelete] = useState(null);
+
   const navigate = useNavigate();
+  useEffect(() => {
+    if (!token ) {
+
+     navigate("/");
+} else {
+  navigate("/brand")
+}
+  }, [token, navigate]);
 
   const getBrands = () => {
     fetch("https://realauto.limsa.uz/api/brands")
       .then((res) => res.json())
-      .then((data) => setCategory(data?.data || []))
+      .then((data) => setCategory(data?.data || []));
   };
 
   const logout = () => {
@@ -27,13 +43,17 @@ const Brands = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Prepare FormData only when submitting the form
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("images", images);
+    if (images) {
+      formData.append("images", images);
+    }
 
-    fetch("https://realauto.limsa.uz/api/brands", {
-      method: "POST",
+    const apiUrl = editBrandId ? `https://realauto.limsa.uz/api/brands/${editBrandId}` : "https://realauto.limsa.uz/api/brands";
+    const method = editBrandId ? "PUT" : "POST";
+
+    fetch(apiUrl, {
+      method,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -41,57 +61,119 @@ const Brands = () => {
     })
       .then((res) => res.json())
       .then((item) => {
-        setCategory((prev) => [...prev, item?.data]); // Add new category to the state
+        if (editBrandId) {
+          setCategory((prev) =>
+            prev.map((brand) =>
+              brand.id === item.data.id ? item.data : brand
+            )
+          );
+        } else {
+          setCategory((prev) => [...prev, item?.data]);
+        }
       })
       .catch((error) => {
         console.error("Error occurred:", error);
-        setError("Failed to create brand");
+        setError("Failed to create or update brand");
       })
       .finally(() => {
         setLoading(false);
         setOpen(false);
+        setEditBrandId(null);
+        setTitle("");
+        setImages(null);
       });
   };
 
-  const deleteCategory = (id) => {
-    fetch(`https://realauto.limsa.uz/api/brands/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then(() => {
-        setCategory((prev) => prev.filter((item) => item.id !== id)); // Remove deleted category from state
-      })
+  const confirmDeleteBrand = (id, title) => {
+    setBrandToDelete(id); 
+    setBrandTitleToDelete(title); 
+    setDeleteModalOpen(true); 
   };
+
+  const deleteBrand = () => {
+    if (brandToDelete) {
+      fetch(`https://realauto.limsa.uz/api/brands/${brandToDelete}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then(() => {
+          setCategory((prev) => prev.filter((item) => item.id !== brandToDelete)); 
+          setDeleteModalOpen(false); 
+          setBrandToDelete(null); 
+          setBrandTitleToDelete(null); 
+        })
+        .catch((error) => {
+          console.error("Error occurred:", error);
+          setError("Failed to delete brand");
+        });
+    }
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false); 
+    setBrandToDelete(null);
+    setBrandTitleToDelete(null); 
+  };
+
+  const editBrand = (item) => {
+    setEditBrandId(item.id);
+    setTitle(item.title); 
+    setImages(null); 
+    setOpen(true); 
+  };
+  
 
   useEffect(() => {
     getBrands();
   }, []);
-  
 
   return (
     <>
       <nav>
         <div className="nav">
           <div className="container">
-            <ul className="nav_list">
-              <li className="nav_item">
-                <button onClick={logout}>Logout</button>
-              </li>
-              <li className="nav_item">
-                <button onClick={() => setOpen(true)}>Open Modal</button>
-              </li>
-            </ul>
+            <div className="nav_box">
+              <h2 className="nav_title">Auto Zoom</h2>
+              <button className="nav_logo" onClick={logout}>Logout</button>
+            </div>
+            <div className="nav_add">
+              <button onClick={() => setOpen(true)}>Open Modal</button>
+            </div>
           </div>
         </div>
       </nav>
 
       <div className="brand">
+        <Sidebar/>
         <div className="container">
           <div className="brand_box">
             {error && <div className="error_message">{error}</div>}
-
+            <ul className="brand_list">
+              <li className="brand_item">Title</li>
+              <li className="brand_item">Images</li>
+              <li className="brand_item">Change</li>
+            </ul>
+            {category?.map((item) => (
+              <section className="category_section" key={item.id}>
+                <div className="category_name">{item?.title}</div>
+                <div className="category_img">
+                  <img
+                    src={`https://realauto.limsa.uz/api/uploads/images/${item?.image_src}`}
+                    alt={`Image for ${item?.title}`}
+                  />
+                </div>
+                <div className="category_btns">
+                  <div className="category_btn" onClick={() => confirmDeleteBrand(item.id, item.title)}>
+                    <ImBin />
+                  </div>
+                  <button className="category_update" onClick={() => editBrand(item)}>
+                    <IoPencil /> 
+                  </button>
+                </div>
+              </section>
+            ))}
             {open && (
               <div className="modal_overlay">
                 <div className="modal_content">
@@ -102,7 +184,9 @@ const Brands = () => {
                     <IoIosCloseCircleOutline />
                   </button>
                   <form onSubmit={createBrand}>
-                    <h2 className="modal_title">Add Brand</h2>
+                    <h2 className="modal_title">
+                      {editBrandId ? "Edit Brand" : "Add Brand"}
+                    </h2>
                     <input
                       onChange={(e) => setTitle(e.target.value)}
                       type="text"
@@ -114,31 +198,26 @@ const Brands = () => {
                     <input
                       type="file"
                       accept="image/*"
-                      required
                       onChange={(e) => setImages(e.target.files[0])}
                     />
                     <button type="submit" disabled={loading}>
-                      {loading ? "Loading..." : "Submit"}
+                      {loading ? "Loading..." : editBrandId ? "Update" : "Submit"}
                     </button>
                   </form>
                 </div>
               </div>
             )}
-
-            {category?.map((item) => (
-              <section className="category_section" key={item.id}>
-                <div className="category_name">{item?.title}</div>
-                <div className="category_img">
-                  <img
-                    src={`https://realauto.limsa.uz/api/uploads/images/${item?.image_src}`}
-                    alt={`Image for ${item?.title}`}
-                  />
+            {deleteModalOpen && (
+              <div className="modal_overlay">
+                <div className="modal_content">
+                  <h2 className="modal_title">{`Are you sure you want to delete this brand: ${brandTitleToDelete}`}</h2>
+                  <div className="modal_buttons">
+                    <button className="modal_delate" onClick={deleteBrand}>Delete</button>
+                    <button className="modal_cancel" onClick={closeDeleteModal}>Cancel</button>
+                  </div>
                 </div>
-                <div className="btn" onClick={() => deleteCategory(item?.id)}>
-                  Delete
-                </div>
-              </section>
-            ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -147,3 +226,6 @@ const Brands = () => {
 };
 
 export default Brands;
+
+
+

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import  toast  from "react-hot-toast"
 import { useNavigate } from "react-router-dom";
 const Forinn = () => {
   const [number, setNumber] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const token = localStorage.getItem("tokenxon")
   const navigate = useNavigate()
   function submit(e) {
     e.preventDefault(); 
@@ -37,6 +38,12 @@ const Forinn = () => {
     setNumber('');
     setPassword('');
   }
+
+  useEffect(() => {
+    if(token) {
+      navigate('/home')
+    }
+  },[])
 
   return (
     <div>

@@ -6,14 +6,14 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="container">
         <ul className="sidebar_list">
-          <Link to="/brand"> 
-            <li className='sidebar_item'>
-              <TbBrandBeats className='sidebar_item_link' />Brands
-            </li>
-          </Link>
           <Link to="/home"> 
             <li className='sidebar_item'>
               <TbCategory className='sidebar_item_link' />Category
+            </li>
+          </Link>
+          <Link to="/brand"> 
+            <li className='sidebar_item'>
+              <TbBrandBeats className='sidebar_item_link' />Brands
             </li>
           </Link>
         </ul>
