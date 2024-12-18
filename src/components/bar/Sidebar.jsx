@@ -16,6 +16,11 @@ const Sidebar = () => {
               <TbBrandBeats className='sidebar_item_link' />Brands
             </li>
           </Link>
+          <Link to="/location"> 
+            <li className='sidebar_item'>
+              <TbBrandBeats className='sidebar_item_link' />location
+            </li>
+          </Link>
         </ul>
       </div>
     </div>

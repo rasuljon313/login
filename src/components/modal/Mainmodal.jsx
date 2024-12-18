@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { IoIosCloseCircleOutline } from "react-icons/io";
-const Mainmodal = ({ setOpen, catigory, name, nameRu, setName, setNameRu, setImg, edit, loading }) => {
+const Mainmodal = ({ setOpen, catigory, name, nameRu, setName, setNameRu, setImg, edit, loading, setText, setNamee }) => {
     return (
       <div>
         <div className="modal_overlay">
@@ -12,8 +12,8 @@ const Mainmodal = ({ setOpen, catigory, name, nameRu, setName, setNameRu, setImg
               <h2 className="modal_title">
                 {edit ? "Edit Category" : "Add Category"}
               </h2>
-              <input onChange={(e) => setName(e.target.value)} type="text" placeholder="Name (EN)" value={name} required minLength={3} />
-              <input onChange={(e) => setNameRu(e.target.value)} type="text" placeholder="Name (RU)" value={nameRu} required minLength={3} />
+              <input onChange={(e) => setName(e.target.value)} type="text"  placeholder={`${setNamee ? "Name" : `Name (EN)`}`} value={name} required minLength={3} />
+              <input onChange={(e) => setNameRu(e.target.value)} type="text" placeholder={`${setText ? "Text" : `Name (RU)`}`} value={nameRu} required minLength={3} />
               <input required type="file" accept="image/*" onChange={(e) => setImg(e.target.files[0])} />
               <button type="submit" disabled={loading} > {loading ? "Loading..." : edit ? "Update" : "Submit"}</button>
             </form>
@@ -23,6 +23,3 @@ const Mainmodal = ({ setOpen, catigory, name, nameRu, setName, setNameRu, setImg
     );
   };
   export default Mainmodal
-  
-  
-  

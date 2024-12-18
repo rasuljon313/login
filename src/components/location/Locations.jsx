@@ -1,3 +1,40 @@
+// import { useEffect, useState } from "react"
+
+// const Locations = () => {
+//   const token = localStorage.getItem("tokenxon")
+//   const formdata = new FormData()
+//   const [name, setName] = useState("")
+//   const [images, setImages] = useState(null)
+//   const [text, setText] = useState("")
+//   formdata.append(name, "name")
+//   formdata.append(text, "text")
+//   if (images) formdata.append("images", images);
+//   const getApi = () => {
+//     fetch("https://realauto.limsa.uz/api/locations")
+//     .then((res)=> res.json())
+//     .then((elem)=> console.log(elem))
+//   }
+//   useEffect(()=>{
+//     getApi()
+//   },[])
+//   const postApi = ()=> {
+//     fetch(`https://realauto.limsa.uz/api/locations`,{
+//       method:"POST",
+//       headers:{
+//         Authorization : `Bearer ${token}`
+//       },
+//       body:formdata
+//     }).then((res)=> res.json())
+//     .then((elem)=> )
+//   }
+//   return (
+//     <div>
+
+//     </div>
+//   )
+// }
+
+// export default Locations
 import { ImBin } from "react-icons/im";
 import { IoPencil } from "react-icons/io5";
 import Mainmodal from "../modal/Mainmodal";
@@ -7,11 +44,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Delate from "../modal/Delate";
 
-const Header = () => {
+const Locations = () => {
   const [category, setCategory] = useState([]);
   const [open, setOpen] = useState(false);
-  const [name_en, setName_en] = useState("");
-  const [name_ru, setName_ru] = useState("");
+  const [name, setName] = useState("");
+  const [text, setText] = useState("");
   const [img, setImg] = useState(null);
   const [loading, setLoading] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -25,18 +62,18 @@ const Header = () => {
     if (!token) {
       navigate("/");
     } else {
-      navigate("/home");
+      navigate("/location");
     }
   }, [token, navigate]);
   
-  formdata.append("name_en", name_en);
-  formdata.append("name_ru", name_ru);
+  formdata.append("name", name);
+  formdata.append("text", text);
   if (img) formdata.append("images", img);
 
   const logout = () => {localStorage.removeItem("tokenxon");navigate("/");};
 
   const getCategory = () => {
-    fetch("https://realauto.limsa.uz/api/categories")
+    fetch("https://realauto.limsa.uz/api/locations")
       .then((res) => res.json())
       .then((element) => setCategory(element?.data || []));
   };
@@ -47,7 +84,7 @@ const Header = () => {
     e.preventDefault();
     setLoading(true);
 
-  const apiUrl = editCategoryId ? `https://realauto.limsa.uz/api/categories/${editCategoryId}` : "https://realauto.limsa.uz/api/categories";
+  const apiUrl = editCategoryId ? `https://realauto.limsa.uz/api/locations/${editCategoryId}` : "https://realauto.limsa.uz/api/locations";
   const method = editCategoryId ? "PUT" : "POST";
 
     fetch(apiUrl, {
@@ -62,8 +99,8 @@ const Header = () => {
         if (elem.success) {
           setOpen(false);
           getCategory();
-          setName_en("");
-          setName_ru("");
+          setName("");
+          setText("");
           setImg(null);
           setEditCategoryId(null);
         }
@@ -83,7 +120,7 @@ const Header = () => {
 
   const deleteCategory = () => {
     if (categoryToDelete) {
-      fetch(`https://realauto.limsa.uz/api/categories/${categoryToDelete}`, {
+      fetch(`https://realauto.limsa.uz/api/locations/${categoryToDelete}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -110,8 +147,8 @@ const Header = () => {
 
   const editCategory = (item) => {
     setEditCategoryId(item.id);
-    setName_en(item.name_en);
-    setName_ru(item.name_ru);
+    setName(item.name);
+    setText(item.text);
     setImg(null);
     setOpen(true);
   };
@@ -126,25 +163,25 @@ const Header = () => {
             <div className="header_box">
               <ul className="header_list">
                 <li className="header_item">
-                  <p>Name_en</p>
+                  <p>Name</p>
                 </li>
                 <li className="header_item">
-                  <p>Name_ru</p>
+                  <p>text</p>
                 </li>
                 <li className="header_item">
                   <p>Images</p>
                 </li>
                 <li className="header_item">
-                  <p>holati</p>
+                  <p>Holati</p>
                 </li>
               </ul>
               <div className="category_box">
                 {category?.map((item) => (
                   <section className="category_section" key={item.id}>
-                    <div className="category_name">{item?.name_en}</div>
-                    <div className="category_name">{item?.name_ru}</div>
+                    <div className="category_name">{item?.name}</div>
+                    <div className="category_name">{item?.text}</div>
                     <div className="category_img">
-                      <img src={`https://realauto.limsa.uz/api/uploads/images/${item?.image_src}`}alt={`Image for ${item?.name_en}`} />
+                      <img src={`https://realauto.limsa.uz/api/uploads/images/${item?.image_src}`}alt={`Image for ${item?.name}`} />
                     </div>
                     <div className="category_btns">
                       <div className="category_btn" onClick={() => confirmDeleteCategory(item?.id)}>
@@ -158,7 +195,7 @@ const Header = () => {
                 ))}
               </div>
               
-              {open && <Mainmodal  setOpen={setOpen}  catigory={createOrEditCategory}  name={name_en}  nameRu={name_ru}  setName={setName_en}  setNameRu={setName_ru}  setImg={setImg}  edit={editCategoryId} loading={loading}  />}
+              {open && <Mainmodal  setOpen={setOpen}  catigory={createOrEditCategory}  name={name}  nameText={text}  setNamee={setName}  setText={setText}  setImg={setImg}  edit={editCategoryId} loading={loading}/>}
 
               {deleteModalOpen && <Delate deleteCategory={deleteCategory} closeDeleteModal={closeDeleteModal} />}
             </div>
@@ -169,4 +206,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Locations;
