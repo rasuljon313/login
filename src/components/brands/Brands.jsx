@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { IoIosCloseCircleOutline } from "react-icons/io";
 import { IoPencil } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../bar/Sidebar";
 import { ImBin } from "react-icons/im";
 import Nav from "../nav/Nav";
+import BrandModal from "../modal/BrandModal";
+import Delate from "../modal/Delate";
 
 const Brands = () => {
   const token = localStorage.getItem("tokenxon");
@@ -22,7 +23,6 @@ const Brands = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (!token ) {
-
      navigate("/");
 } else {
   navigate("/brand")
@@ -162,50 +162,8 @@ const Brands = () => {
                 </div>
               </section>
             ))}
-            {open && (
-              <div className="modal_overlay">
-                <div className="modal_content">
-                  <button
-                    className="modal_close"
-                    onClick={() => setOpen(false)}
-                  >
-                    <IoIosCloseCircleOutline />
-                  </button>
-                  <form onSubmit={createBrand}>
-                    <h2 className="modal_title">
-                      {editBrandId ? "Edit Brand" : "Add Brand"}
-                    </h2>
-                    <input
-                      onChange={(e) => setTitle(e.target.value)}
-                      type="text"
-                      placeholder="Name (EN)"
-                      value={title}
-                      required
-                      minLength={3}
-                    />
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => setImages(e.target.files[0])}
-                    />
-                    <button type="submit" disabled={loading}>
-                      {loading ? "Loading..." : editBrandId ? "Update" : "Submit"}
-                    </button>
-                  </form>
-                </div>
-              </div>
-            )}
-            {deleteModalOpen && (
-              <div className="modal_overlay">
-                <div className="modal_content">
-                  <h2 className="modal_title">{`Are you sure you want to delete this brand: ${brandTitleToDelete}`}</h2>
-                  <div className="modal_buttons">
-                    <button className="modal_delate" onClick={deleteBrand}>Delete</button>
-                    <button className="modal_cancel" onClick={closeDeleteModal}>Cancel</button>
-                  </div>
-                </div>
-              </div>
-            )}
+            {open && <BrandModal setOpen={setOpen} createBrand={createBrand} setTitle={setTitle} editBrandId={editBrandId} setImages={setImages} title={title}loading={loading}/>}
+            {deleteModalOpen && <Delate deleteCategory={deleteBrand} closeDeleteModal={closeDeleteModal} brandTitleToDelete={brandTitleToDelete} />}
           </div>
         </div>
       </div>

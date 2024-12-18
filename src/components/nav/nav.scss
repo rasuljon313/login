@@ -1,0 +1,20 @@
+.nav {
+    background: #01384D;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    &_box{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &_title{
+      color: #fff;
+      font-size: 32px;
+    }
+    &_add{
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+  }

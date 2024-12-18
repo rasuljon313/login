@@ -33,49 +33,6 @@ button {
     background-color: #0056b3;
   }
 }
-
-
-
-
-.modal{
-  &_overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-&_content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  position: relative;
-}
-&_close{
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  &_icon{
-    width: 15px;
-    height: 15px;
-  }
-}
-&_title {
-  font-size: 24px;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #333;
-}
-}
-
 input[type="text"],
 input[type="file"] {
   width: 70%;
@@ -116,47 +73,4 @@ button[type="submit"] {
   }
 }
 
-.nav {
-  background: #01384D;
-  height: 10vh;
-  display: flex;
-  align-items: center;
-  &_box{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  &_title{
-    color: #fff;
-    font-size: 32px;
-  }
-  &_add{
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-  }
-}
-.modal{
-  &_buttons{
-    display: flex;
-    align-items: center;
-    justify-content:space-evenly;
-  }
-  &_delate{
-    background-color: #fbe8e9;
-    color: #D61F1F;
-    &:hover{
-      border: 1px solid #D61F1F !important;
-      background-color: #fbe8e9 !important;
-    }
-  }
-&_cancel{
-  background: #dcdcdc;
-  color: #01384D;
-  &:hover{
-      border: 1px solid #007bff !important;
-      background-color: #dcdcdc !important;
-    }
-}
 
-}

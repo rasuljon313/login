@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
-import { IoIosCloseCircleOutline } from "react-icons/io";
-import { IoPencil } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
-import Sidebar from "../bar/Sidebar";
 import { ImBin } from "react-icons/im";
-import Nav from "../nav/Nav";  // Import the Nav component
+import { IoPencil } from "react-icons/io5";
+import Mainmodal from "../modal/Mainmodal";
+import Sidebar from "../bar/Sidebar";
+import Nav from "../nav/Nav";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Delate from "../modal/Delate";
 
 const Header = () => {
   const [category, setCategory] = useState([]);
@@ -32,10 +33,7 @@ const Header = () => {
   formdata.append("name_ru", name_ru);
   if (img) formdata.append("images", img);
 
-  const logout = () => {
-    localStorage.removeItem("tokenxon");
-    navigate("/");
-  };
+  const logout = () => {localStorage.removeItem("tokenxon");navigate("/");};
 
   const getCategory = () => {
     fetch("https://realauto.limsa.uz/api/categories")
@@ -43,18 +41,14 @@ const Header = () => {
       .then((element) => setCategory(element?.data || []));
   };
 
-  useEffect(() => {
-    getCategory();
-  }, []);
+  useEffect(() => {getCategory();},[]);
 
   const createOrEditCategory = (e) => {
     e.preventDefault();
     setLoading(true);
 
-    const apiUrl = editCategoryId
-      ? `https://realauto.limsa.uz/api/categories/${editCategoryId}`
-      : "https://realauto.limsa.uz/api/categories";
-    const method = editCategoryId ? "PUT" : "POST";
+  const apiUrl = editCategoryId ? `https://realauto.limsa.uz/api/categories/${editCategoryId}` : "https://realauto.limsa.uz/api/categories";
+  const method = editCategoryId ? "PUT" : "POST";
 
     fetch(apiUrl, {
       method,
@@ -124,8 +118,7 @@ const Header = () => {
 
   return (
     <>
-      <Nav logout={logout} setOpen={setOpen} />  {/* Add Nav component */}
-      
+      <Nav logout={logout} setOpen={setOpen} /> 
       <header>
         <div className="header">
           <Sidebar />
@@ -151,10 +144,7 @@ const Header = () => {
                     <div className="category_name">{item?.name_en}</div>
                     <div className="category_name">{item?.name_ru}</div>
                     <div className="category_img">
-                      <img
-                        src={`https://realauto.limsa.uz/api/uploads/images/${item?.image_src}`}
-                        alt={`Image for ${item?.name_en}`}
-                      />
+                      <img src={`https://realauto.limsa.uz/api/uploads/images/${item?.image_src}`}alt={`Image for ${item?.name_en}`} />
                     </div>
                     <div className="category_btns">
                       <div className="category_btn" onClick={() => confirmDeleteCategory(item?.id)}>
@@ -167,66 +157,10 @@ const Header = () => {
                   </section>
                 ))}
               </div>
+              
+              {open && <Mainmodal  setOpen={setOpen}  catigory={createOrEditCategory}  name={name_en}  nameRu={name_ru}  setName={setName_en}  setNameRu={setName_ru}  setImg={setImg}  edit={editCategoryId} loading={loading}  />}
 
-              {open && (
-                <div className="modal_overlay">
-                  <div className="modal_content">
-                    <button
-                      className="modal_close"
-                      onClick={() => setOpen(false)}
-                    >
-                      <IoIosCloseCircleOutline />
-                    </button>
-                    <form onSubmit={createOrEditCategory}>
-                      <h2 className="modal_title">
-                        {editCategoryId ? "Edit Category" : "Add Category"}
-                      </h2>
-                      <input
-                        onChange={(e) => setName_en(e.target.value)}
-                        type="text"
-                        placeholder="Name (EN)"
-                        value={name_en}
-                        required
-                        minLength={3}
-                      />
-                      <input
-                        onChange={(e) => setName_ru(e.target.value)}
-                        type="text"
-                        placeholder="Name (RU)"
-                        value={name_ru}
-                        required
-                        minLength={3}
-                      />
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => setImg(e.target.files[0])}
-                      />
-                      <button type="submit" disabled={loading}>
-                        {loading ? "Loading..." : editCategoryId ? "Update" : "Submit"}
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              )}
-
-              {deleteModalOpen && (
-                <div className="modal_overlay">
-                  <div className="modal_content">
-                    <h2 className="modal_title">
-                      Are you sure you want to delete this category?
-                    </h2>
-                    <div className="modal_buttons">
-                      <button className="modal_delate" onClick={deleteCategory}>
-                        Delete
-                      </button>
-                      <button className="modal_cancel" onClick={closeDeleteModal}>
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
+              {deleteModalOpen && <Delate deleteCategory={deleteCategory} closeDeleteModal={closeDeleteModal} />}
             </div>
           </div>
         </div>
@@ -236,4 +170,3 @@ const Header = () => {
 };
 
 export default Header;
-
