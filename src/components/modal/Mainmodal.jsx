@@ -24,8 +24,8 @@ const Mainmodal = ({setOpen, catigory, name, nameRu, setName, setNameRu, setImg,
                             {edit ? "Edit Category" : "Add Category"}
                         </h2>
                         {existingImageSrc && (
-                            <div className="existing-image">
-                                <p>Existing Image:</p>
+                            <div className="modal_imgs">
+                                <p>Existing Image</p>
                                 <img 
                                     src={`https://realauto.limsa.uz/api/uploads/images/${existingImageSrc}`} 
                                     alt="Existing Category" 

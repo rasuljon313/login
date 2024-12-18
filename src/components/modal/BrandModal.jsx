@@ -102,14 +102,14 @@ const BrandModal = ({ setOpen, createBrand, setTitle, editBrandId, setImages, ti
                             minLength={3}
                         />
                         {existingImageSrc && (
-                            <div className="existing-image">
-                                <p>Existing Image:</p>
-                                <img 
-                                    src={`https://realauto.limsa.uz/api/uploads/images/${existingImageSrc}`} 
-                                    alt="Existing Category" 
-                                    style={{ width: '100px', height: 'auto' }} 
-                                />
-                            </div>
+                             <div className="modal_imgs">
+                             <p>Existing Image</p>
+                             <img 
+                                 src={`https://realauto.limsa.uz/api/uploads/images/${existingImageSrc}`} 
+                                 alt="Existing Category" 
+                                 style={{ width: '100px', height: 'auto' }} 
+                             />
+                         </div>
                         )}
                         <input
                             required={!existingImageSrc}

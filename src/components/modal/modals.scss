@@ -13,7 +13,7 @@
   }
 
   &_content {
-    background-color: #fff;
+    background-color: #1c1c1c;
     padding: 20px;
     border-radius: 8px;
     width: 400px;
@@ -34,7 +34,17 @@
     font-size: 24px;
     margin-bottom: 20px;
     text-align: center;
-    color: #333;
+    color: #fff;
+  }
+  &_imgs{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 8px;
+    p{
+      color: #fff;
+      font-size: 18px;
+    }
   }
   &_buttons {
     display: flex;

@@ -9,22 +9,26 @@
     }
     &_card {
       border-radius: 8px;
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      justify-content: center;
-      box-shadow: 4px 4px 20px 1px #d5d5d5; /* Gray box-shadow */
-      padding: 20px;
-      background-color: white;
-      width: 300px !important;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 4px 4px 20px 1px #57565694;
+    padding: 20px;
+    background-color: white;
+    width: 300px !important;
+    background: #252525;
     }
     &_input{
+      outline: none;
       width: 100% !important;
       padding: 10px;
       margin-bottom: 15px;
       border-radius: 4px;
-      border: 1px solid #ccc;
+      border: unset;
       font-size: 14px;
+      background: #1c1c1c !important;
+      border-radius: 8px !important;
     }
     &_btn{
       background: #007bff !important;
