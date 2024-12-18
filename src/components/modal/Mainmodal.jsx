@@ -1,8 +1,9 @@
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 /* eslint-disable react/prop-types */
-const Mainmodal = ({setOpen, catigory, name, nameRu, setName, setNameRu, setImg, edit, loading, resetForm, existingImageSrc}) => {
-
+const Mainmodal = ({setOpen, catigory, name, nameRu, setName, setNameRu, setImg, edit, loading, resetForm, existingImageSrc  
+}) => {
+    
     const handleOverlayClick = (e) => {
         if (e.target === e.currentTarget) {
             setOpen(false);  

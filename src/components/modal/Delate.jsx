@@ -22,3 +22,4 @@ const Delate = ({ deleteCategory, closeDeleteModal, brandTitleToDelete }) => {
 };
 
 export default Delate;
+

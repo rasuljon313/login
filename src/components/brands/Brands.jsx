@@ -19,6 +19,7 @@ const Brands = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [brandToDelete, setBrandToDelete] = useState(null);
   const [brandTitleToDelete, setBrandTitleToDelete] = useState(null);
+  const [existingImageSrc, setExistingImageSrc] = useState(null); 
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -122,6 +123,7 @@ const Brands = () => {
     setEditBrandId(item.id);
     setTitle(item.title); 
     setImages(null); 
+    setExistingImageSrc(item.image_src); 
     setOpen(true); 
   };
   
@@ -162,7 +164,7 @@ const Brands = () => {
                 </div>
               </section>
             ))}
-            {open && <BrandModal setOpen={setOpen} createBrand={createBrand} setTitle={setTitle} editBrandId={editBrandId} setImages={setImages} title={title}loading={loading}/>}
+            {open && <BrandModal setOpen={setOpen} createBrand={createBrand} setTitle={setTitle} editBrandId={editBrandId} setImages={setImages} title={title}loading={loading} setExistingImageSrc={setExistingImageSrc} existingImageSrc={existingImageSrc} /> }
             {deleteModalOpen && <Delate deleteCategory={deleteBrand} closeDeleteModal={closeDeleteModal} brandTitleToDelete={brandTitleToDelete} />}
           </div>
         </div>

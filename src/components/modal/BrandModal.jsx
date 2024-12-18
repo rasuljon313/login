@@ -1,19 +1,21 @@
 /* eslint-disable react/prop-types */
 import { IoIosCloseCircleOutline } from 'react-icons/io'
 
-const BrandModal = ({setOpen,createBrand,
-  setTitle,
-  editBrandId,
-  setImages,
-  title,
-  loading}) => {
+const BrandModal = ({setOpen,createBrand,setTitle,editBrandId,setImages,title,loading, existingImageSrc, setExistingImageSrc}) => {
+
+    const resetForm = () => {
+      setTitle("");
+      setImages(null);
+      setExistingImageSrc(null); 
+    };
+    
   return (
     <div>
             <div className="modal_overlay">
                 <div className="modal_content">
                   <button
                     className="modal_close"
-                    onClick={() => setOpen(false)}
+                    onClick={() => {setOpen(false), resetForm()}}
                   >
                     <IoIosCloseCircleOutline />
                   </button>
@@ -24,11 +26,21 @@ const BrandModal = ({setOpen,createBrand,
                     <input
                       onChange={(e) => setTitle(e.target.value)}
                       type="text"
-                      placeholder="Name (EN)"
+                      placeholder="Title"
                       value={title}
                       required
                       minLength={3}
                     />
+                    {existingImageSrc && (
+                            <div className="existing-image">
+                                <p>Existing Image:</p>
+                                <img 
+                                    src={`https://realauto.limsa.uz/api/uploads/images/${existingImageSrc}`} 
+                                    alt="Existing Category" 
+                                    style={{ width: '100px', height: 'auto' }} 
+                                />
+                            </div>
+                        )}
                     <input
                       type="file"
                       accept="image/*"
