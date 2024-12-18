@@ -17,6 +17,7 @@ const Header = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [categoryToDelete, setCategoryToDelete] = useState(null);
   const [editCategoryId, setEditCategoryId] = useState(null);
+  const [existingImageSrc, setExistingImageSrc] = useState(null); // Store the existing image src
   const token = localStorage.getItem("tokenxon");
   const formdata = new FormData();
   const navigate = useNavigate();
@@ -28,12 +29,12 @@ const Header = () => {
       navigate("/home");
     }
   }, [token, navigate]);
-  
+
   formdata.append("name_en", name_en);
   formdata.append("name_ru", name_ru);
   if (img) formdata.append("images", img);
 
-  const logout = () => {localStorage.removeItem("tokenxon");navigate("/");};
+  const logout = () => { localStorage.removeItem("tokenxon"); navigate("/"); };
 
   const getCategory = () => {
     fetch("https://realauto.limsa.uz/api/categories")
@@ -41,14 +42,14 @@ const Header = () => {
       .then((element) => setCategory(element?.data || []));
   };
 
-  useEffect(() => {getCategory();},[]);
+  useEffect(() => { getCategory(); }, []);
 
   const createOrEditCategory = (e) => {
     e.preventDefault();
     setLoading(true);
 
-  const apiUrl = editCategoryId ? `https://realauto.limsa.uz/api/categories/${editCategoryId}` : "https://realauto.limsa.uz/api/categories";
-  const method = editCategoryId ? "PUT" : "POST";
+    const apiUrl = editCategoryId ? `https://realauto.limsa.uz/api/categories/${editCategoryId}` : "https://realauto.limsa.uz/api/categories";
+    const method = editCategoryId ? "PUT" : "POST";
 
     fetch(apiUrl, {
       method,
@@ -66,6 +67,7 @@ const Header = () => {
           setName_ru("");
           setImg(null);
           setEditCategoryId(null);
+          setExistingImageSrc(null); // Clear existing image after submission
         }
       })
       .catch((error) => {
@@ -113,12 +115,20 @@ const Header = () => {
     setName_en(item.name_en);
     setName_ru(item.name_ru);
     setImg(null);
+    setExistingImageSrc(item.image_src); 
     setOpen(true);
+  };
+
+  const resetForm = () => {
+    setName_en("");
+    setName_ru("");
+    setImg(null);
+    setExistingImageSrc(null); 
   };
 
   return (
     <>
-      <Nav logout={logout} setOpen={setOpen} /> 
+      <Nav logout={logout} setOpen={setOpen} />
       <header>
         <div className="header">
           <Sidebar />
@@ -144,7 +154,7 @@ const Header = () => {
                     <div className="category_name">{item?.name_en}</div>
                     <div className="category_name">{item?.name_ru}</div>
                     <div className="category_img">
-                      <img src={`https://realauto.limsa.uz/api/uploads/images/${item?.image_src}`}alt={`Image for ${item?.name_en}`} />
+                      <img src={`https://realauto.limsa.uz/api/uploads/images/${item?.image_src}`} alt={`Image for ${item?.name_en}`} />
                     </div>
                     <div className="category_btns">
                       <div className="category_btn" onClick={() => confirmDeleteCategory(item?.id)}>
@@ -157,8 +167,20 @@ const Header = () => {
                   </section>
                 ))}
               </div>
-              
-              {open && <Mainmodal  setOpen={setOpen}  catigory={createOrEditCategory}  name={name_en}  nameRu={name_ru}  setName={setName_en}  setNameRu={setName_ru}  setImg={setImg}  edit={editCategoryId} loading={loading}  />}
+
+              {open && <Mainmodal  
+                setOpen={setOpen} 
+                catigory={createOrEditCategory} 
+                name={name_en} 
+                nameRu={name_ru} 
+                setName={setName_en} 
+                setNameRu={setName_ru} 
+                setImg={setImg} 
+                edit={editCategoryId} 
+                loading={loading} 
+                resetForm={resetForm} 
+                existingImageSrc={existingImageSrc} // Pass the existing image source
+              />}
 
               {deleteModalOpen && <Delate deleteCategory={deleteCategory} closeDeleteModal={closeDeleteModal} />}
             </div>
