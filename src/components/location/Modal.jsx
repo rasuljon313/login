@@ -1,6 +1,6 @@
 import { IoIosCloseCircleOutline } from "react-icons/io";
 /* eslint-disable react/prop-types */
-const Modal = ({setOpen, createOrEdilocation, namee, nameText, setNamee,setText,setImg,edit,loading,currentImage,resetForm,}) => {
+const Modal = ({setOpen, createOrEdilocation, name, nameText, setNamee,setText,setImg,edit,loading,currentImage,resetForm,}) => {
   const handleClose = (e) => {
     if (e.target === e.currentTarget) {
       setOpen(false);
@@ -27,7 +27,7 @@ const Modal = ({setOpen, createOrEdilocation, namee, nameText, setNamee,setText,
             <input
               id="name"
               type="text"
-              value={namee}
+              value={name}
               onChange={(e) => setNamee(e.target.value)}
               required
               placeholder="Name"

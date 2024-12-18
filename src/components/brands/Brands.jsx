@@ -165,7 +165,9 @@ const Brands = () => {
               </section>
             ))}
             {open && <BrandModal setOpen={setOpen} createBrand={createBrand} setTitle={setTitle} editBrandId={editBrandId} setImages={setImages} title={title}loading={loading} setExistingImageSrc={setExistingImageSrc} existingImageSrc={existingImageSrc} /> }
-            {deleteModalOpen && <Delate deleteCategory={deleteBrand} closeDeleteModal={closeDeleteModal} brandTitleToDelete={brandTitleToDelete} />}
+            
+            {deleteModalOpen && <Delate deleteCategory={deleteBrand} closeDeleteModal={closeDeleteModal}  
+             brandTitleToDelete={brandTitleToDelete} />}
           </div>
         </div>
       </div>

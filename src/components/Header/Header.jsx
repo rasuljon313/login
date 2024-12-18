@@ -17,7 +17,7 @@ const Header = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [categoryToDelete, setCategoryToDelete] = useState(null);
   const [editCategoryId, setEditCategoryId] = useState(null);
-  const [existingImageSrc, setExistingImageSrc] = useState(null); // Store the existing image src
+  const [existingImageSrc, setExistingImageSrc] = useState(null); 
   const token = localStorage.getItem("tokenxon");
   const formdata = new FormData();
   const navigate = useNavigate();
@@ -181,6 +181,23 @@ const Header = () => {
                 resetForm={resetForm} 
                 existingImageSrc={existingImageSrc} // Pass the existing image source
               />}
+             {/* {open && (
+    <Mainmodal
+        setOpen={setOpen}
+        category={createOrEditCategory}  // For category related actions
+        Hname={name_en}
+        HnameRu={name_ru}
+        HsetName={setName_en}
+        HsetNameRu={setName_ru}
+        setImg={setImg}
+        Hedit={editCategoryId}
+        loading={loading}
+        resetForm={resetForm}
+        existingImageSrc={existingImageSrc}  // Existing image source for category
+        isLocation={false}  // This is a category, not a location
+    />
+)} */}
+
 
               {deleteModalOpen && <Delate deleteCategory={deleteCategory} closeDeleteModal={closeDeleteModal} />}
             </div>
