@@ -1,4 +1,4 @@
-// eslint-disable-next-line react/prop-types
+/* eslint-disable react/prop-types */
 const Nav = ({ logout, setOpen }) => {
   return (
     <nav>
