@@ -4,6 +4,7 @@ import { IoPencil } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../bar/Sidebar";
 import { ImBin } from "react-icons/im";
+import Nav from "../nav/Nav";
 
 const Brands = () => {
   const token = localStorage.getItem("tokenxon");
@@ -131,20 +132,7 @@ const Brands = () => {
 
   return (
     <>
-      <nav>
-        <div className="nav">
-          <div className="container">
-            <div className="nav_box">
-              <h2 className="nav_title">Auto Zoom</h2>
-              <button className="nav_logo" onClick={logout}>Logout</button>
-            </div>
-            <div className="nav_add">
-              <button onClick={() => setOpen(true)}>Open Modal</button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
+    <Nav logout={logout} setOpen={setOpen}/>
       <div className="brand">
         <Sidebar/>
         <div className="container">

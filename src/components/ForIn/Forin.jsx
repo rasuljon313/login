@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import  toast  from "react-hot-toast"
 import { useNavigate } from "react-router-dom";
@@ -66,7 +65,6 @@ const Forinn = () => {
                 placeholder="Password" 
                 required 
               />
-              {/* <button className="forin_btn" type="submit">Login</button> */}
               <button className="forin_btn" type="submit" disabled={loading}>
                         {loading ? "Loading..." : "Login"}
                       </button>
