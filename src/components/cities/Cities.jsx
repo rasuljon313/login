@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Delate from "../modal/Delate";
 import Modal from "../location/Modal";
+// import Mainmodal from "../modal/Mainmodal";
 
-const Locations = () => {
+const Cityes = () => {
   const [category, setCategory] = useState([]);
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
@@ -17,9 +18,9 @@ const Locations = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [categoryToDelete, setCategoryToDelete] = useState(null);
   const [editCategoryId, setEditCategoryId] = useState(null);
-  const [currentImage, setCurrentImage] = useState("");  
+  const [currentImage, setCurrentImage] = useState("");
+  const [delateName, setDelateName] = useState("");  
   const token = localStorage.getItem("tokenxon");
-  const [takeIDlocation, setTakeIDLocation] = useState(""); 
   const formdata = new FormData();
   const navigate = useNavigate();
 
@@ -27,34 +28,29 @@ const Locations = () => {
     if (!token) {
       navigate("/");
     } else {
-      navigate("/location");
+      navigate("/city");
     }
   }, [token, navigate]);
-
+  
   formdata.append("name", name);
   formdata.append("text", text);
   if (img) formdata.append("images", img);
 
-  const logout = () => {
-    localStorage.removeItem("tokenxon");
-    navigate("/");
-  };
+  const logout = () => {localStorage.removeItem("tokenxon");navigate("/");};
 
-  const getCategory = () => {
-    fetch("https://realauto.limsa.uz/api/locations")
+  const getcity = () => {
+    fetch("https://realauto.limsa.uz/api/cities")
       .then((res) => res.json())
       .then((element) => setCategory(element?.data || []));
   };
 
-  useEffect(() => { getCategory(); }, []);
+  useEffect(() => {getcity();},[]);
 
-  const createOrEditLocation = (e) => {
+  const createOrEdiCity = (e) => {
     e.preventDefault();
     setLoading(true);
 
-    const apiUrl = editCategoryId
-      ? `https://realauto.limsa.uz/api/locations/${editCategoryId}`
-      : "https://realauto.limsa.uz/api/locations";
+    const apiUrl = editCategoryId ? `https://realauto.limsa.uz/api/cities/${editCategoryId}` : "https://realauto.limsa.uz/api/cities";
     const method = editCategoryId ? "PUT" : "POST";
 
     fetch(apiUrl, {
@@ -68,7 +64,7 @@ const Locations = () => {
       .then((elem) => {
         if (elem.success) {
           setOpen(false);
-          getCategory();
+          getcity();
           setName("");
           setText("");
           setImg(null);
@@ -84,15 +80,15 @@ const Locations = () => {
       });
   };
 
-  const confirmDeleteLocation = (id, name) => {
+  const confirmDeleteCategory = (id, name) => {
     setCategoryToDelete(id);
-    setTakeIDLocation(name); 
+    setDelateName(name); 
     setDeleteModalOpen(true);
   };
 
-  const deleteLocation = () => {
+  const deleteCategory = () => {
     if (categoryToDelete) {
-      fetch(`https://realauto.limsa.uz/api/locations/${categoryToDelete}`, {
+      fetch(`https://realauto.limsa.uz/api/cities/${categoryToDelete}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -101,10 +97,10 @@ const Locations = () => {
         .then((res) => res.json())
         .then((item) => {
           if (item.success) {
-            getCategory();
+            getcity();
             setDeleteModalOpen(false);
             setCategoryToDelete(null);
-            setTakeIDLocation(""); 
+            setDelateName("");
           }
         })
         .catch((error) => {
@@ -116,18 +112,18 @@ const Locations = () => {
   const closeDeleteModal = () => {
     setDeleteModalOpen(false);
     setCategoryToDelete(null);
-    setTakeIDLocation(""); 
+    setDelateName("");
   };
 
   const editCategory = (item) => {
     setEditCategoryId(item.id);
     setName(item.name);
     setText(item.text);
-    setImg(null);
+    setImg(null); 
     setCurrentImage(item.image_src);  
     setOpen(true);
   };
-
+  
   const resetForm = () => {
     setName("");
     setText("");
@@ -166,7 +162,7 @@ const Locations = () => {
                       <img src={`https://realauto.limsa.uz/api/uploads/images/${item?.image_src}`} alt={`Image for ${item?.name}`} />
                     </div>
                     <div className="category_btns">
-                      <div className="category_btn" onClick={() => confirmDeleteLocation(item?.id, item?.name)}>
+                      <div className="category_btn" onClick={() => confirmDeleteCategory(item?.id, item?.name)}>
                         <ImBin />
                       </div>
                       <button className="category_update" onClick={() => editCategory(item)}>
@@ -178,12 +174,22 @@ const Locations = () => {
               </div>
               
               {open && (
-                <Modal setOpen={setOpen} createOrEdilocation={createOrEditLocation} name={name} nameText={text} setNamee={setName} setText={setText} setImg={setImg} edit={editCategoryId} resetForm={resetForm} loading={loading} currentImage={currentImage}/>
+                <Modal 
+                  setOpen={setOpen}  
+                  createOrEdilocation={createOrEdiCity}  
+                  name={name}  
+                  nameText={text}  
+                  setNamee={setName}  
+                  setText={setText}  
+                  setImg={setImg}  
+                  edit={editCategoryId} 
+                  resetForm={resetForm}
+                  loading={loading} 
+                  currentImage={currentImage}
+                />
               )}
 
-              {deleteModalOpen && (
-                <Delate takeIDlocation={takeIDlocation} deleteCategory={deleteLocation} closeDeleteModal={closeDeleteModal}/>
-              )}
+              {deleteModalOpen && <Delate delateName={delateName} deleteCategory={deleteCategory} closeDeleteModal={closeDeleteModal} />}
             </div>
           </div>
         </div>
@@ -192,5 +198,5 @@ const Locations = () => {
   );
 };
 
-export default Locations;
+export default Cityes;
 

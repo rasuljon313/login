@@ -3,6 +3,7 @@ import ForInInput from "../pages/ForInInput";
 import Home from "../pages/Home";
 import Brand from "../pages/Brand";
 import Location from "../pages/Location";
+import City from "../pages/City";
 
 const App = () => {
 
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/brand" element={<Brand />} />
         <Route path="/location" element={<Location />} />
+        <Route path="/city" element={<City />} />
       </Routes>
     </div>
   );

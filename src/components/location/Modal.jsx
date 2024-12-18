@@ -41,6 +41,7 @@ const Modal = ({setOpen, createOrEdilocation, name, nameText, setNamee,setText,s
             ></textarea>
             <label htmlFor="image">Image</label>
             <input
+            required={!currentImage}
               id="image"
               type="file"
               onChange={(e) => setImg(e.target.files[0])} 

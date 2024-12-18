@@ -17,7 +17,8 @@ const Header = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [categoryToDelete, setCategoryToDelete] = useState(null);
   const [editCategoryId, setEditCategoryId] = useState(null);
-  const [existingImageSrc, setExistingImageSrc] = useState(null); 
+  const [existingImageSrc, setExistingImageSrc] = useState(null);
+  const [takeIDname, setTakeIDname] = useState(""); 
   const token = localStorage.getItem("tokenxon");
   const formdata = new FormData();
   const navigate = useNavigate();
@@ -67,7 +68,7 @@ const Header = () => {
           setName_ru("");
           setImg(null);
           setEditCategoryId(null);
-          setExistingImageSrc(null); // Clear existing image after submission
+          setExistingImageSrc(null);
         }
       })
       .catch((error) => {
@@ -78,8 +79,9 @@ const Header = () => {
       });
   };
 
-  const confirmDeleteCategory = (id) => {
+  const confirmDeleteCategory = (id, name_en) => {
     setCategoryToDelete(id);
+    setTakeIDname(name_en); 
     setDeleteModalOpen(true);
   };
 
@@ -96,6 +98,7 @@ const Header = () => {
           if (item.success) {
             getCategory();
             setDeleteModalOpen(false);
+            setTakeIDname(""); 
             setCategoryToDelete(null);
           }
         })
@@ -108,6 +111,7 @@ const Header = () => {
   const closeDeleteModal = () => {
     setDeleteModalOpen(false);
     setCategoryToDelete(null);
+    setTakeIDname(""); 
   };
 
   const editCategory = (item) => {
@@ -115,7 +119,7 @@ const Header = () => {
     setName_en(item.name_en);
     setName_ru(item.name_ru);
     setImg(null);
-    setExistingImageSrc(item.image_src); 
+    setExistingImageSrc(item.image_src);
     setOpen(true);
   };
 
@@ -123,7 +127,7 @@ const Header = () => {
     setName_en("");
     setName_ru("");
     setImg(null);
-    setExistingImageSrc(null); 
+    setExistingImageSrc(null);
   };
 
   return (
@@ -132,8 +136,9 @@ const Header = () => {
       <header>
         <div className="header">
           <Sidebar />
+          <div className="header_box">
           <div className="container">
-            <div className="header_box">
+
               <ul className="header_list">
                 <li className="header_item">
                   <p>Name_en</p>
@@ -157,7 +162,7 @@ const Header = () => {
                       <img src={`https://realauto.limsa.uz/api/uploads/images/${item?.image_src}`} alt={`Image for ${item?.name_en}`} />
                     </div>
                     <div className="category_btns">
-                      <div className="category_btn" onClick={() => confirmDeleteCategory(item?.id)}>
+                      <div className="category_btn" onClick={() => confirmDeleteCategory(item?.id, item?.name_en)}>
                         <ImBin />
                       </div>
                       <button className="category_update" onClick={() => editCategory(item)}>
@@ -168,38 +173,29 @@ const Header = () => {
                 ))}
               </div>
 
-              {open && <Mainmodal  
-                setOpen={setOpen} 
-                catigory={createOrEditCategory} 
-                name={name_en} 
-                nameRu={name_ru} 
-                setName={setName_en} 
-                setNameRu={setName_ru} 
-                setImg={setImg} 
-                edit={editCategoryId} 
-                loading={loading} 
-                resetForm={resetForm} 
-                existingImageSrc={existingImageSrc} // Pass the existing image source
-              />}
-             {/* {open && (
-    <Mainmodal
-        setOpen={setOpen}
-        category={createOrEditCategory}  // For category related actions
-        Hname={name_en}
-        HnameRu={name_ru}
-        HsetName={setName_en}
-        HsetNameRu={setName_ru}
-        setImg={setImg}
-        Hedit={editCategoryId}
-        loading={loading}
-        resetForm={resetForm}
-        existingImageSrc={existingImageSrc}  // Existing image source for category
-        isLocation={false}  // This is a category, not a location
-    />
-)} */}
+              {open && (
+                <Mainmodal
+                  setOpen={setOpen}
+                  catigory={createOrEditCategory}
+                  name={name_en}
+                  nameRu={name_ru}
+                  setName={setName_en}
+                  setNameRu={setName_ru}
+                  setImg={setImg}
+                  edit={editCategoryId}
+                  loading={loading}
+                  resetForm={resetForm}
+                  existingImageSrc={existingImageSrc}
+                />
+              )}
 
-
-              {deleteModalOpen && <Delate deleteCategory={deleteCategory} closeDeleteModal={closeDeleteModal} />}
+              {deleteModalOpen && (
+                <Delate
+                  takeIDname={takeIDname} 
+                  deleteCategory={deleteCategory}
+                  closeDeleteModal={closeDeleteModal}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -209,3 +205,4 @@ const Header = () => {
 };
 
 export default Header;
+

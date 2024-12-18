@@ -11,6 +11,7 @@ const Mainmodal = ({setOpen, catigory, name, nameRu, setName, setNameRu, setImg,
         }
     };
 
+
     return (
         <div>
             <div className="modal_overlay" onClick={handleOverlayClick}>

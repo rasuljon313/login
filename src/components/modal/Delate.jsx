@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-const Delate = ({ deleteCategory, closeDeleteModal, brandTitleToDelete }) => {
+const Delate = ({ deleteCategory, closeDeleteModal, brandTitleToDelete, takeIDname, takeIDlocation, delateName }) => {
   return (
     <div>
       <div className="modal_overlay">
         <div className="modal_content">
           <h2 className="modal_title">
-            {`Are you sure you want to delete this ${brandTitleToDelete ? brandTitleToDelete : `category`} ?`}
+            {`Are you sure you want to delete this ${brandTitleToDelete ? brandTitleToDelete : takeIDname || takeIDlocation || delateName } ?`}
           </h2>
           <div className="modal_buttons">
             <button className="modal_delate" onClick={deleteCategory}>

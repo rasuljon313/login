@@ -83,6 +83,7 @@ const Brands = () => {
         setEditBrandId(null);
         setTitle("");
         setImages(null);
+        setExistingImageSrc(null)
       });
   };
 
@@ -137,8 +138,8 @@ const Brands = () => {
     <Nav logout={logout} setOpen={setOpen}/>
       <div className="brand">
         <Sidebar/>
+        <div className="brand_box">
         <div className="container">
-          <div className="brand_box">
             {error && <div className="error_message">{error}</div>}
             <ul className="brand_list">
               <li className="brand_item">Title</li>
