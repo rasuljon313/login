@@ -1,11 +1,11 @@
-import { Navigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
-const Nav = ({ setOpen }) => {
-     const logout = () => {
-    localStorage.removeItem("tokenxon");
-    Navigate("/");
-  };
+const Nav = ({ logout, setOpen }) => {
+  //    const logout = () => {
+  //   localStorage.removeItem("tokenxon");
+  //   Navigate("/");
+  // };
   return (
     <nav>
       <div className="nav">

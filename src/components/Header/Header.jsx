@@ -22,7 +22,6 @@ const Header = () => {
   const token = localStorage.getItem("tokenxon");
   const formdata = new FormData();
   const navigate = useNavigate();
-
   useEffect(() => {
     if (!token) {
       navigate("/");
