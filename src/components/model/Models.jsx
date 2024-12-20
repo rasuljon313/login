@@ -72,28 +72,6 @@ const Models = () => {
       .catch((err) => console.error("Error fetching brands:", err))
       .finally(() => setLoadingBrands(false));
   };
-const handleClick = (e) => {
-    e.preventDefault();
-    fetch("https://realauto.limsa.uz/api/models", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formdata,
-    })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data?.success) {
-        setCategoryModel((prevModels) => [
-          ...prevModels,
-          { name: name, brand_id: selectBrand, id: data?.data?.id, brand_title: categoryBrand.find(b => b.id === selectBrand)?.title }
-        ]);
-
-        setOpen(false); 
-      }
-    })
-    .catch((err) => console.error("Error submitting model:", err));
-  };
   const confirmDeleteCategory = (id, name_en) => {
     setCategoryToDelete(id);
     setTakeIDname(name_en); 
@@ -230,12 +208,11 @@ const handleClick = (e) => {
 
       {open && (
         <ModelModal
-        createOrEditCategory={createOrEditCategory}
-        editID={editID}
+          createOrEditCategory={createOrEditCategory}
+          editID={editID}
           setOpen={setOpen}
           loading={loadingModels || loadingBrands}
           categoryBrand={categoryBrand}
-          handleClick={handleClick}
           setSelectbrand={setSelectbrand}
           setName={setName}
         />

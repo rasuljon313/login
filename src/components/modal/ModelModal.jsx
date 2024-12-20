@@ -1,13 +1,8 @@
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 /* eslint-disable react/prop-types */
-const ModelModal = ({ setOpen, loading, categoryBrand,categoryModel, createOrEditCategory, handleClick, setSelectbrand,name, setName, editID }) => {
+const ModelModal = ({ setOpen, loading, categoryBrand,categoryModel, createOrEditCategory, setSelectbrand,name, setName, editID }) => {
   
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleClick(e);
-
-  };
 
   return (
     <div>
@@ -16,7 +11,7 @@ const ModelModal = ({ setOpen, loading, categoryBrand,categoryModel, createOrEdi
           <button className="modal_close" onClick={() => setOpen(false)}>
             <IoIosCloseCircleOutline />
           </button>
-          <form onSubmit={handleSubmit}> 
+          <form onSubmit={createOrEditCategory}> 
           <h2 className="modal_title">
                             {editID ? "Edit Model" : "Add mModel"}
                 </h2>
