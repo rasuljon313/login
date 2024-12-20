@@ -1,0 +1,31 @@
+.models{
+    display: flex;
+    height: calc(100vh - 10vh);
+    &_box{
+      border-radius: 20px 0 0 0 ;
+      padding-top: 15px;
+      width: 100%;
+      height: 90vh;
+      overflow-x: scroll;
+      background: #252525;
+    }
+    &_list {
+      display: flex;
+      justify-content: space-evenly;
+      background-color: #1c1c1c;
+      padding: 10px;
+      border-radius: 20px;
+    }
+    &_item {
+      width: 200px;
+      font-size: 14px;
+      padding: 10px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      p {
+        color: #fff;
+      }
+    }
+}

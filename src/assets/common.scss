@@ -31,10 +31,14 @@ button {
   transition: background-color 0.3s;
   &:hover {
     background-color: green;
+    color: #000;
+    svg{
+      color: #000;
+    }
   }
 }
 input[type="text"],
-input[type="file"],textarea {
+input[type="file"],textarea, select {
 background-color: #252525;
   width: 70%;
   padding: 10px;
