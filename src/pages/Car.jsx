@@ -1,11 +1,11 @@
-import Cars from '../components/Cars/Cars'
+// import Cars from '../components/Cars/Cars'
 
-const Car = () => {
-  return (
-    <div>
-        <Cars/>
-    </div>
-  )
-}
+// const Car = () => {
+//   return (
+//     <div>
+//         <Cars/>
+//     </div>
+//   )
+// }
 
-export default Car
+// export default Car
