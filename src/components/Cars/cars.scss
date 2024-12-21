@@ -1,0 +1,10 @@
+.car{
+    display: flex;
+    height: calc(100vh - 10vh);
+   &_item{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+   }
+}

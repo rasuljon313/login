@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const Nav = ({ logout, setOpen }) => {
+const Nav = ({ logout, setOpen, setOpenM }) => {
   return (
     <nav>
       <div className="nav">
@@ -11,7 +11,7 @@ const Nav = ({ logout, setOpen }) => {
             </button>
           </div>
           <div className="nav_add">
-            <button onClick={() => setOpen(true)}>Open Modal</button>
+            <button onClick={() => {setOpen? setOpen(true) : setOpenM(true)}}>Open Modal</button>
           </div>
         </div>
       </div>
