@@ -4,7 +4,7 @@ import Home from "../pages/Home";
 import Brand from "../pages/Brand";
 import Location from "../pages/Location";
 import City from "../pages/City";
-// import Car from "../pages/Car";
+import Car from "../pages/Car";
 import Model from "../pages/Model";
 
 const App = () => {
@@ -17,7 +17,7 @@ const App = () => {
         <Route path="/brand" element={<Brand />} />
         <Route path="/location" element={<Location />} />
         <Route path="/city" element={<City />} />
-        {/* <Route path="/car" element={<Car />} /> */}
+        <Route path="/car" element={<Car />} />
         <Route path="/model" element={<Model />} />
       </Routes>
     </div>
