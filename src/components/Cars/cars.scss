@@ -1,6 +1,12 @@
-.car{
+.cars{
     display: flex;
     height: calc(100vh - 10vh);
+    &_box{
+        background:#252525;
+        display: flex;
+        width: 100%;
+        border-radius: 20px 0 0 0 ;
+    }
    &_item{
     display: flex;
     align-items: center;
