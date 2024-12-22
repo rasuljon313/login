@@ -99,7 +99,7 @@ const Cars = () => {
   const pushApiC = () => {
     const formdata = new FormData();
     formdata.append("color", color);
-    formdata.append("image_src", brandID);
+    formdata.append("brand_id", brandID);
 
     fetch("https://realauto.limsa.uz/api/cars", {
       method: "POST",
