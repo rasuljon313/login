@@ -11,6 +11,13 @@
     justify-content: center;
     align-items: center;
   }
+  &_box{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 400px;
+    overflow-x: scroll;
+  }
 
   &_content {
     background-color: #1c1c1c;
