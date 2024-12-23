@@ -2,13 +2,13 @@
 import { IoIosCloseCircleOutline } from 'react-icons/io'
 
 const CModal = ({
+  setSetcreate,
   setOpenC,
   pushApiC,
   setYear,
   setMaxspeed,
   location,
   setCover,
-  setInclusive,
   setLocationID,
   setPremiumP,
   setPremiumA,
@@ -126,17 +126,16 @@ const CModal = ({
                   </option>
                 ))}
               </select>
+              <select name="" id="">
+                <option value=""> Select inclusive</option>
+                <option value=""> true</option>
+                <option value=""> false</option>
+              </select>
               <input
                 required
                 onChange={e => setColor(e.target.value)}
                 type='text'
                 placeholder='Car color'
-              />
-              <input
-                required
-                onChange={e => setInclusive(e.target.value)}
-                type='text'
-                placeholder='Inclusive'
               />
               <input
                 required
@@ -228,6 +227,19 @@ const CModal = ({
                 type='number'
                 placeholder='USD sale'
               />
+
+
+
+              <input
+                required
+                onChange={e => setSetcreate(e.target.value)}
+                type='number'
+                placeholder='2 days price'
+              />
+
+
+
+
 
               <input
                 required

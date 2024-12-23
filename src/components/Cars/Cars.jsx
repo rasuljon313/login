@@ -29,6 +29,7 @@ const Cars = () => {
   const [premiumAS, setPremiumAS] = useState('')
   const [premiumu, setPremiumU] = useState('')
   const [premiumUS, setPremiumUS] = useState('')
+  const [createdAt, setSetcreate] = useState('')
   const [inclusive, setInclusive] = useState(false)
   const [imgID, setImg] = useState('')
   const [cover, setCover] = useState('')
@@ -104,6 +105,7 @@ const Cars = () => {
     formdata.append('price_in_usd', premiumu)
     formdata.append('price_in_aed_sale', premiumAS)
     formdata.append('price_in_usd_sale', premiumUS)
+    formdata.append('created_at', createdAt)
     formdata.append('inclusive', inclusive)
     formdata.append('cover', cover)
     formdata.append('images', imgID)
@@ -132,6 +134,7 @@ const Cars = () => {
     })
     .catch((err) => console.error("Error:", err));
   }
+console.log(saveCars);
 
   return (
     <div>
@@ -143,6 +146,9 @@ const Cars = () => {
           <div className="cars_card">
             <ul className='cars_list'>
               <li className='cars_item'>Brad img</li>
+              <li className='cars_item'>City img</li>
+              <li className='cars_item'>location img</li>
+              <li className='cars_item'>Category name <span>EN</span></li>
               <li className='cars_item'>Model Name</li>
               <li className='cars_item'>Cars Images</li>
               <li className='cars_item'>Cars color</li>
@@ -152,12 +158,27 @@ const Cars = () => {
               <li className='cars_item'>Cars limit <span>per day</span> </li>
               <li className='cars_item'>Cars max <span>people</span></li>
               <li className='cars_item'>Cars max <span>speed</span></li>
+              <li className='cars_item'>Cars motor</li>
+              <li className='cars_item'>Cars petrol</li>
+              <li className='cars_item'>Cars premium</li>
+              <li className='cars_item'>Cars AED</li>
+              <li className='cars_item'>Cars aed sale</li>
+              <li className='cars_item'>Cars USD</li>
+              <li className='cars_item'>Cars usd sale</li>
+              <li className='cars_item'>Cars seconds</li>
+              {/* <li className='cars_item'>Cars 3 days <span>price</span></li> */}
+              <li className='cars_item'>Cars <span>transmission</span></li>
+              <li className='cars_item'>Cars 2 days <span>price</span></li>
             </ul>
 
             {saveCars?.map(item => (  
+              // console.log(item)
               <section className="cars_list_box" key={item.id}>
                 <div className="cars_list_card">
                 <img className='cars_inbrandimg' src={`https://realauto.limsa.uz/api/uploads/images/${item.brand.image_src}`} alt={item.brand.title} />
+                <img className='cars_inbrandimg' src={`https://realauto.limsa.uz/api/uploads/images/${item.city.image_src}`} alt={item.city.name} />
+                <img className='cars_inbrandimg' src={`https://realauto.limsa.uz/api/uploads/images/${item.location.image_src}`} alt={item.location.name} />
+                <div className='cars_color'>{item.category.name_en}</div>
                 <div className='cars_color'>{item.model.name}</div>
                 </div> 
                 <div className="cars_img_card">
@@ -182,6 +203,17 @@ const Cars = () => {
                  <div className='cars_color'>{item.limitperday}</div>
                  <div className='cars_color'>{item.max_people}</div>
                  <div className='cars_color'>{item.max_speed}</div>
+                 <div className='cars_color'>{item.motor}</div>
+                 <div className='cars_color'>{item.petrol}</div>
+                 <div className='cars_color'>{item.premium_protection}</div>
+                 <div className='cars_color'>{item.price_in_aed}</div>
+                 <div className='cars_color'>{item.price_in_aed_sale}</div>
+                 <div className='cars_color'>{item.price_in_usd}</div>
+                 <div className='cars_color'>{item.price_in_usd_sale}</div>
+                 <div className='cars_color'>{item.seconds}</div>
+                 {/* <div className='cars_color'>{item.three_days_price}</div> */}
+                 <div className='cars_color'>{item.transmission}</div>
+                 <div className='cars_color'>{item.two_days_price}</div>
               </section>
             ))}
             </div>
@@ -191,6 +223,7 @@ const Cars = () => {
 
       {openC && (
         <CModal
+        setSetcreate={setSetcreate}
           setCover={setCover}
           setInclusive={setInclusive}
           setLocationID={setLocationID}
