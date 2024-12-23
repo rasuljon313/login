@@ -119,7 +119,9 @@ const Models = () => {
     setCategoryToDelete(null);
     setSelectbrand(null);
   };
-  const confirmDeleteCategory = (id, name) => {setTakeIDname(name);setCategoryToDelete(id);setDeleteModalOpen(true);};
+  const confirmDeleteCategory = (id, name) => {setTakeIDname(name);setCategoryToDelete(id);setDeleteModalOpen(true)};
+  console.log(categoryModel);
+  
   return (
     <>
       <Nav logout={logout} setOpen={setOpen} />
