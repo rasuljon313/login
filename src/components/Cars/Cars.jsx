@@ -70,7 +70,6 @@ const Cars = () => {
       .then(res => res.json())
       .then(elem => setSaveCars(elem?.data))
   }
-  console.log(saveModels);
 
   useEffect(() => {
     getBrand()
@@ -147,6 +146,12 @@ const Cars = () => {
               <li className='cars_item'>Model Name</li>
               <li className='cars_item'>Cars Images</li>
               <li className='cars_item'>Cars color</li>
+              <li className='cars_item'>Cars year</li>
+              <li className='cars_item'>Cars deposit</li>
+              <li className='cars_item'>Cars drive <span>side</span> </li>
+              <li className='cars_item'>Cars limit <span>per day</span> </li>
+              <li className='cars_item'>Cars max <span>people</span></li>
+              <li className='cars_item'>Cars max <span>speed</span></li>
             </ul>
 
             {saveCars?.map(item => (  
@@ -170,6 +175,13 @@ const Cars = () => {
                 }
                  </div>
                  <div className='cars_color'>{item.color}</div>
+                 <div className='cars_color'>{item.year}</div>
+                 {/* <div className='cars_color'>{item.created_at}</div> */}
+                 <div className='cars_color'>{item.deposit}</div>
+                 <div className='cars_color'>{item.drive_side}</div>
+                 <div className='cars_color'>{item.limitperday}</div>
+                 <div className='cars_color'>{item.max_people}</div>
+                 <div className='cars_color'>{item.max_speed}</div>
               </section>
             ))}
             </div>
