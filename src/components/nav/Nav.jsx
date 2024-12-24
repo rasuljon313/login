@@ -6,12 +6,11 @@ const Nav = ({ logout, setOpen, setOpenM, setOpenC }) => {
         <div className="container">
           <div className="nav_box">
             <h2 className="nav_title">Auto Zoom</h2>
+            <div className="nav_btns">
             <button className="nav_logo" onClick={logout}>
               Logout
             </button>
-          </div>
-          <div className="nav_add">
-            <button onClick={() => {setOpen? setOpen(true) : setOpenM ? setOpenM(true) : setOpenC(true)}}>Open Modal</button>
+            <button onClick={() => {setOpen? setOpen(true) : setOpenM ? setOpenM(true) : setOpenC(true)}}>Open Modal</button></div>
           </div>
         </div>
       </div>

@@ -12,9 +12,9 @@
       color: #fff;
       font-size: 32px;
     }
-    &_add{
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
+    &_btns{
+      display: flex;
+      align-items: center;
+      gap: 30px;
     }
   }

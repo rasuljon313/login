@@ -5,6 +5,8 @@ import CModal from '../modal/CModal'
 // import { CiSquareQuestion } from 'react-icons/ci'
 import { BsQuestionCircleFill } from 'react-icons/bs'
 import { IoPencil } from 'react-icons/io5'
+import { ImBin } from 'react-icons/im'
+import Delate from '../modal/Delate'
 // import { ImBin } from 'react-icons/im'
 // import { IoPencil } from 'react-icons/io5'
 
@@ -33,6 +35,10 @@ const Cars = () => {
   const [premiumu, setPremiumU] = useState('')
   const [premiumUS, setPremiumUS] = useState('')
   const [inclusive, setInclusive] = useState(false)
+  const [delateNameC, setDelateName] = useState("")
+  const [delatModalopen, setDeleteModalOpen] = useState("")
+  const [delateID, setDelateID] = useState("")
+
 
 // const [currentimg, setcurrentimg] = useState("")
 const [editCategoryId, setEditCategoryId] = useState(null)
@@ -147,6 +153,59 @@ const [editCategoryId, setEditCategoryId] = useState(null)
    
   // }
   // console.log(editCategoryId);
+
+  const deleteCarscategory = () => {
+      {
+        delateID &&
+         fetch(`https://realauto.limsa.uz/api/cars/${delateID}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((res) => res.json())
+          .then((item) => {
+            if (item.success) {
+              getCar();
+              setDeleteModalOpen(false);
+              setDelateID(null);
+              setDelateName("");
+              setSaveBrand([])
+setSaveCars([])
+setSaveModels([])
+setSaveCategories([])
+setSaveCity([])
+setLocation
+setColor("")
+setYear("")
+setSecond("")
+setMaxspeed("")
+setMaxpeople("")
+setTransmission("")
+setMator("")
+setDrives("")
+setPetrol("") 
+setLimitp("") 
+setDeposit("") 
+setPremiumP("") 
+setPremiumA("") 
+setPremiumU("") 
+setPremiumAS("") 
+setPremiumUS("") 
+setImg("") 
+setCover("") 
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+  }
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
+    setDelateID(null);
+    setDelateName("");
+  };
   
   const editCategory = (item) => {
     setOpenC(true)
@@ -176,6 +235,11 @@ const [editCategoryId, setEditCategoryId] = useState(null)
   }
 
 // console.log(currentimg);
+const confirmDeleteCategory = (id) => {
+setDelateID(id?.id)
+setDelateName(id?.category?.name_en)
+setDeleteModalOpen(true);
+}
 
   return (
     <div>
@@ -208,6 +272,7 @@ const [editCategoryId, setEditCategoryId] = useState(null)
               <li className='cars_item'>Cars usd sale</li>
               <li className='cars_item'>Cars seconds</li>
               <li className='cars_item'>Cars <span>transmission</span></li>
+              <li className='cars_item'>Update</li>
             </ul>
 
             {saveCars?.map(item => (  
@@ -250,6 +315,9 @@ const [editCategoryId, setEditCategoryId] = useState(null)
                  <div className='cars_color'>{item.seconds}</div>
                  <div className='cars_color'>{item.transmission}</div>
                   <div className="category_btns">
+                <div className="category_btn" onClick={() => confirmDeleteCategory(item)}>
+                        <ImBin />
+                </div>
                  <button className="category_update" onClick={() => editCategory(item)}>
                    <IoPencil />
                  </button>
@@ -315,6 +383,9 @@ const [editCategoryId, setEditCategoryId] = useState(null)
           saveBrand={saveBrand}
         />
       )}
+      {
+        delatModalopen &&  <Delate delateNameC={delateNameC} deleteCarscategory={deleteCarscategory} closeDeleteModal={closeDeleteModal}/> 
+      }
     </div>
   )
 }
