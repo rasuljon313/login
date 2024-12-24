@@ -33,7 +33,6 @@ const CModal = ({
   setColor,
   saveCategories,
   setCategoryID,
-  cover
 }) => {
   
   return (
@@ -233,7 +232,6 @@ const CModal = ({
                 onChange={e => setImg(e.target.files[0])}
                 accept='image/*'
                 multiple
-                value={cover}
                 type='file'
               />
               <input

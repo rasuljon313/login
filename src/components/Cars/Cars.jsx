@@ -5,7 +5,7 @@ import CModal from '../modal/CModal'
 // import { CiSquareQuestion } from 'react-icons/ci'
 import { BsQuestionCircleFill } from 'react-icons/bs'
 // import { ImBin } from 'react-icons/im'
-import { IoPencil } from 'react-icons/io5'
+// import { IoPencil } from 'react-icons/io5'
 
 const Cars = () => {
   const [saveBrand, setSaveBrand] = useState([])
@@ -137,23 +137,23 @@ const Cars = () => {
   // const confirmDeleteCategory = (id, name_en) => {
    
   // }
-  const editCategory = (item) => {
-    setOpenC(true)
-   setColor(item?.color)
-   setYear(item?.year)
-   setMaxspeed(item?.max_speed)
-   setMaxpeople(item?.max_people)
-   setTransmission(item?.transmission)
-   setMator(item?.motor)
-   setDrives(item?.drive_side)
-   setSecond(item?.seconds)
-   setPetrol(item.petrol)
-   setLimitp(item?.limitperday)
-   setDeposit(item?.deposit)
-   setPremiumP(item?.premium_protection)
-   setPremiumA(item?.price_in_aed)
-   setPremiumU(item?.price_in_usd)
-  }
+  // const editCategory = (item) => {
+  //   setOpenC(true)
+  //  setColor(item?.color)
+  //  setYear(item?.year)
+  //  setMaxspeed(item?.max_speed)
+  //  setMaxpeople(item?.max_people)
+  //  setTransmission(item?.transmission)
+  //  setMator(item?.motor)
+  //  setDrives(item?.drive_side)
+  //  setSecond(item?.seconds)
+  //  setPetrol(item.petrol)
+  //  setLimitp(item?.limitperday)
+  //  setDeposit(item?.deposit)
+  //  setPremiumP(item?.premium_protection)
+  //  setPremiumA(item?.price_in_aed)
+  //  setPremiumU(item?.price_in_usd)
+  // }
 
   return (
     <div>
@@ -229,13 +229,9 @@ const Cars = () => {
                  <div className='cars_color'>{item.seconds}</div>
                  <div className='cars_color'>{item.transmission}</div>
                   <div className="category_btns">
-                 {/* <div className="category_btn"
-                   onClick={() => confirmDeleteCategory(item?.id, item?.name)}>
-                   <ImBin />
-                 </div> */}
-                 <button className="category_update" onClick={() => editCategory(item)}>
+                 {/* <button className="category_update" onClick={() => editCategory(item)}>
                    <IoPencil />
-                 </button>
+                 </button> */}
                </div>
               </section>
             ))}
@@ -278,7 +274,6 @@ const Cars = () => {
           setColor={setColor}
           setOpenC={setOpenC}
           saveBrand={saveBrand}
-          cover={cover}
         />
       )}
     </div>
