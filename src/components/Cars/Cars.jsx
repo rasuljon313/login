@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import CModal from '../modal/CModal'
 // import { CiSquareQuestion } from 'react-icons/ci'
 import { BsQuestionCircleFill } from 'react-icons/bs'
+// import { ImBin } from 'react-icons/im'
+import { IoPencil } from 'react-icons/io5'
 
 const Cars = () => {
   const [saveBrand, setSaveBrand] = useState([])
@@ -29,7 +31,6 @@ const Cars = () => {
   const [premiumAS, setPremiumAS] = useState('')
   const [premiumu, setPremiumU] = useState('')
   const [premiumUS, setPremiumUS] = useState('')
-  const [createdAt, setSetcreate] = useState('')
   const [inclusive, setInclusive] = useState(false)
   const [imgID, setImg] = useState('')
   const [cover, setCover] = useState('')
@@ -105,7 +106,6 @@ const Cars = () => {
     formdata.append('price_in_usd', premiumu)
     formdata.append('price_in_aed_sale', premiumAS)
     formdata.append('price_in_usd_sale', premiumUS)
-    formdata.append('created_at', createdAt)
     formdata.append('inclusive', inclusive)
     formdata.append('cover', cover)
     formdata.append('images', imgID)
@@ -134,7 +134,26 @@ const Cars = () => {
     })
     .catch((err) => console.error("Error:", err));
   }
-console.log(saveCars);
+  // const confirmDeleteCategory = (id, name_en) => {
+   
+  // }
+  const editCategory = (item) => {
+    setOpenC(true)
+   setColor(item?.color)
+   setYear(item?.year)
+   setMaxspeed(item?.max_speed)
+   setMaxpeople(item?.max_people)
+   setTransmission(item?.transmission)
+   setMator(item?.motor)
+   setDrives(item?.drive_side)
+   setSecond(item?.seconds)
+   setPetrol(item.petrol)
+   setLimitp(item?.limitperday)
+   setDeposit(item?.deposit)
+   setPremiumP(item?.premium_protection)
+   setPremiumA(item?.price_in_aed)
+   setPremiumU(item?.price_in_usd)
+  }
 
   return (
     <div>
@@ -166,9 +185,7 @@ console.log(saveCars);
               <li className='cars_item'>Cars USD</li>
               <li className='cars_item'>Cars usd sale</li>
               <li className='cars_item'>Cars seconds</li>
-              {/* <li className='cars_item'>Cars 3 days <span>price</span></li> */}
               <li className='cars_item'>Cars <span>transmission</span></li>
-              <li className='cars_item'>Cars 2 days <span>price</span></li>
             </ul>
 
             {saveCars?.map(item => (  
@@ -197,7 +214,6 @@ console.log(saveCars);
                  </div>
                  <div className='cars_color'>{item.color}</div>
                  <div className='cars_color'>{item.year}</div>
-                 {/* <div className='cars_color'>{item.created_at}</div> */}
                  <div className='cars_color'>{item.deposit}</div>
                  <div className='cars_color'>{item.drive_side}</div>
                  <div className='cars_color'>{item.limitperday}</div>
@@ -211,9 +227,16 @@ console.log(saveCars);
                  <div className='cars_color'>{item.price_in_usd}</div>
                  <div className='cars_color'>{item.price_in_usd_sale}</div>
                  <div className='cars_color'>{item.seconds}</div>
-                 {/* <div className='cars_color'>{item.three_days_price}</div> */}
                  <div className='cars_color'>{item.transmission}</div>
-                 <div className='cars_color'>{item.two_days_price}</div>
+                  <div className="category_btns">
+                 {/* <div className="category_btn"
+                   onClick={() => confirmDeleteCategory(item?.id, item?.name)}>
+                   <ImBin />
+                 </div> */}
+                 <button className="category_update" onClick={() => editCategory(item)}>
+                   <IoPencil />
+                 </button>
+               </div>
               </section>
             ))}
             </div>
@@ -223,7 +246,7 @@ console.log(saveCars);
 
       {openC && (
         <CModal
-        setSetcreate={setSetcreate}
+        color={color}
           setCover={setCover}
           setInclusive={setInclusive}
           setLocationID={setLocationID}
@@ -255,7 +278,7 @@ console.log(saveCars);
           setColor={setColor}
           setOpenC={setOpenC}
           saveBrand={saveBrand}
-          color={color}
+          cover={cover}
         />
       )}
     </div>

@@ -2,7 +2,7 @@
 import { IoIosCloseCircleOutline } from 'react-icons/io'
 
 const CModal = ({
-  setSetcreate,
+  color,
   setOpenC,
   pushApiC,
   setYear,
@@ -33,8 +33,8 @@ const CModal = ({
   setColor,
   saveCategories,
   setCategoryID,
+  cover
 }) => {
-  console.log(saveModels);
   
   return (
     <div>
@@ -132,6 +132,7 @@ const CModal = ({
                 <option value=""> false</option>
               </select>
               <input
+               value={color}
                 required
                 onChange={e => setColor(e.target.value)}
                 type='text'
@@ -227,25 +228,12 @@ const CModal = ({
                 type='number'
                 placeholder='USD sale'
               />
-
-
-
-              <input
-                required
-                onChange={e => setSetcreate(e.target.value)}
-                type='number'
-                placeholder='2 days price'
-              />
-
-
-
-
-
               <input
                 required
                 onChange={e => setImg(e.target.files[0])}
                 accept='image/*'
                 multiple
+                value={cover}
                 type='file'
               />
               <input
