@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import CModal from '../modal/CModal'
 // import { CiSquareQuestion } from 'react-icons/ci'
 import { BsQuestionCircleFill } from 'react-icons/bs'
+import { IoPencil } from 'react-icons/io5'
 // import { ImBin } from 'react-icons/im'
 // import { IoPencil } from 'react-icons/io5'
 
@@ -32,9 +33,12 @@ const Cars = () => {
   const [premiumu, setPremiumU] = useState('')
   const [premiumUS, setPremiumUS] = useState('')
   const [inclusive, setInclusive] = useState(false)
-  const [imgID, setImg] = useState('')
-  const [cover, setCover] = useState('')
 
+const [currentimg, setcurrentimg] = useState("")
+const [editCategoryId, setEditCategoryId] = useState(null)
+
+  const [imgID, setImg] = useState(null)
+  const [cover, setCover] = useState('')
   const [brandID, setBrandId] = useState('')
   const [categoryID, setCategoryID] = useState('')
   const [modelID, setModelID] = useState('')
@@ -108,9 +112,12 @@ const Cars = () => {
     formdata.append('price_in_usd_sale', premiumUS)
     formdata.append('inclusive', inclusive)
     formdata.append('cover', cover)
-    formdata.append('images', imgID)
-    fetch('https://realauto.limsa.uz/api/cars', {
-      method: 'POST',
+    if(imgID) formdata.append('images', imgID)
+
+      const apiUrl = editCategoryId ? `https://realauto.limsa.uz/api/cities/${editCategoryId}` : "https://realauto.limsa.uz/api/cities";
+      const method = editCategoryId ? "PUT" : "POST";
+    fetch( apiUrl, {
+      method: method,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -128,6 +135,8 @@ const Cars = () => {
         setModelID("");
         setBrandId("");
         setImg(null);
+        setcurrentimg("")
+        setEditCategoryId(null);
       } else {
         console.error("Error:", data.message);
       }
@@ -137,23 +146,29 @@ const Cars = () => {
   // const confirmDeleteCategory = (id, name_en) => {
    
   // }
-  // const editCategory = (item) => {
-  //   setOpenC(true)
-  //  setColor(item?.color)
-  //  setYear(item?.year)
-  //  setMaxspeed(item?.max_speed)
-  //  setMaxpeople(item?.max_people)
-  //  setTransmission(item?.transmission)
-  //  setMator(item?.motor)
-  //  setDrives(item?.drive_side)
-  //  setSecond(item?.seconds)
-  //  setPetrol(item.petrol)
-  //  setLimitp(item?.limitperday)
-  //  setDeposit(item?.deposit)
-  //  setPremiumP(item?.premium_protection)
-  //  setPremiumA(item?.price_in_aed)
-  //  setPremiumU(item?.price_in_usd)
-  // }
+  const editCategory = (item) => {
+    setOpenC(true)
+    setEditCategoryId(item?.id)
+   setColor(item?.color)
+   setYear(item?.year)
+   setMaxspeed(item?.max_speed)
+   setMaxpeople(item?.max_people)
+   setTransmission(item?.transmission)
+   setMator(item?.motor)
+   setDrives(item?.drive_side)
+   setSecond(item?.seconds)
+   setPetrol(item.petrol)
+   setLimitp(item?.limitperday)
+   setDeposit(item?.deposit)
+   setPremiumP(item?.premium_protection)
+   setPremiumA(item?.price_in_aed)
+   setPremiumU(item?.price_in_usd)
+   setPremiumAS(item?.price_in_aed_sale)
+   setPremiumUS(item?.price_in_usd_sale)
+   setcurrentimg(item?.images)
+   setCover(item?.cover)
+   setImg(null)
+  }
 
   return (
     <div>
@@ -229,9 +244,9 @@ const Cars = () => {
                  <div className='cars_color'>{item.seconds}</div>
                  <div className='cars_color'>{item.transmission}</div>
                   <div className="category_btns">
-                 {/* <button className="category_update" onClick={() => editCategory(item)}>
+                 <button className="category_update" onClick={() => editCategory(item)}>
                    <IoPencil />
-                 </button> */}
+                 </button>
                </div>
               </section>
             ))}
@@ -242,6 +257,24 @@ const Cars = () => {
 
       {openC && (
         <CModal
+        editCategoryId={editCategoryId}
+        year={year}
+        second={second}
+        maxspeedID={maxspeedID}
+        maxpeopleID={maxpeopleID}
+        transmissionID={transmissionID}
+        setMatorID={setMatorID}
+        driveSide={driveSide}
+        petrol={petrol}
+        limitperday={limitperday}
+        deposit={deposit}
+        premiump={premiump}
+        premiuma={premiuma}
+        premiumu={premiumu}
+        premiumAS={premiumAS}
+        premiumUS={premiumUS}
+        currentimg={currentimg}
+        cover={cover}
         color={color}
           setCover={setCover}
           setInclusive={setInclusive}

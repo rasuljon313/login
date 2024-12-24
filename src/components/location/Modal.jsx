@@ -3,7 +3,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 const Modal = ({setOpen, createOrEdilocation, name, nameText, setNamee,setText,setImg,edit,loading,currentImage,resetForm,}) => {
   const handleClose = (e) => {
     if (e.target === e.currentTarget) { setOpen(false); resetForm();}
-  };
+  };setImg
   return (
     <div className="modal_overlay" onClick={handleClose}>
       <div className="modal_content">

@@ -120,7 +120,6 @@ const Models = () => {
     setSelectbrand(null);
   };
   const confirmDeleteCategory = (id, name) => {setTakeIDname(name);setCategoryToDelete(id);setDeleteModalOpen(true)};
-  console.log(categoryModel);
   
   return (
     <>

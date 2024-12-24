@@ -33,7 +33,32 @@ const CModal = ({
   setColor,
   saveCategories,
   setCategoryID,
+  cover,
+  currentimg,
+  premiumUS,
+  premiumAS,
+  premiumu,
+  premiuma,
+  premiump,
+  deposit,
+  limitperday,
+  petrol,
+  driveSide,
+  setMatorID,
+  transmissionID,
+  maxpeopleID,
+  maxspeedID,
+  second,
+  year,
+  editCategoryId
 }) => {
+  console.log(cover, currentimg);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setOpenC(false)
+    pushApiC(e);
+  };
   
   return (
     <div>
@@ -42,8 +67,8 @@ const CModal = ({
           <button className='modal_close' onClick={() => setOpenC(false)}>
             <IoIosCloseCircleOutline />
           </button>
-          <form onSubmit={pushApiC}>
-            <h2 className='modal_title'>{'Add Model'}</h2>
+          <form onSubmit={handleSubmit}>
+            <h2 className='modal_title'>{`${editCategoryId ? "edit" :" Add Model"}`}</h2>
             <div className='modal_box'>
               <select
                 name='chose'
@@ -130,6 +155,8 @@ const CModal = ({
                 <option value=""> true</option>
                 <option value=""> false</option>
               </select>
+
+              
               <input
                value={color}
                 required
@@ -141,106 +168,173 @@ const CModal = ({
                 required
                 onChange={e => setYear(e.target.value)}
                 type='number'
+                value={year}
                 placeholder='Car year'
               />
               <input
                 required
                 onChange={e => setSecond(e.target.value)}
                 type='number'
+                value={second}
                 placeholder='Car seconds'
-              />
+              /> 
               <input
                 required
                 onChange={e => setMaxspeed(e.target.value)}
                 type='number'
+                value={maxspeedID}
                 placeholder='Max speed'
               />
               <input
                 required
                 onChange={e => setMaxpeople(e.target.value)}
                 type='number'
+                value={maxpeopleID}
                 placeholder='Max people'
               />
               <input
                 required
                 onChange={e => setTransmission(e.target.value)}
                 type='number'
+                value={transmissionID}
                 placeholder='Transmission'
               />
               <input
                 required
                 onChange={e => setMator(e.target.value)}
                 type='number'
+                value={setMatorID}
                 placeholder='Motor'
               />
               <input
                 required
                 onChange={e => setDrives(e.target.value)}
                 type='number'
+                value={driveSide}
                 placeholder='Drive side'
               />
               <input
                 required
                 onChange={e => setPetrol(e.target.value)}
                 type='number'
+                value={petrol}
                 placeholder='Petrol'
               />
               <input
                 required
                 onChange={e => setLimitp(e.target.value)}
                 type='number'
+                value={limitperday}
                 placeholder='Limit'
               />
               <input
                 required
                 onChange={e => setDeposit(e.target.value)}
                 type='number'
+                value={deposit}
                 placeholder='Deposit'
               />
               <input
                 required
                 onChange={e => setPremiumP(e.target.value)}
                 type='number'
+                value={premiump}
                 placeholder='Premium'
               />
               <input
                 required
                 onChange={e => setPremiumA(e.target.value)}
                 type='number'
+                value={premiuma}
                 placeholder='Premium AED'
               />
               <input
                 required
                 onChange={e => setPremiumU(e.target.value)}
                 type='number'
+                value={premiumu}
                 placeholder='Premium USD'
               />
               <input
                 required
                 onChange={e => setPremiumAS(e.target.value)}
                 type='number'
+                value={premiumAS}
                 placeholder='AED sale'
               />
               <input
                 required
                 onChange={e => setPremiumUS(e.target.value)}
                 type='number'
+                value={premiumUS}
                 placeholder='USD sale'
               />
-              <input
-                required
+              {/* <input
+                required={!currentimg}
                 onChange={e => setImg(e.target.files[0])}
                 accept='image/*'
                 multiple
                 type='file'
               />
+              {
+                currentimg && (
+                  <div className="image_preview">
+                  <img src={`https://realauto.limsa.uz/api/uploads/images/${currentimg}`} alt="Existing Category" style={{ width: "100px", height: "auto" }} />
+                </div>
+                )
+              }
               <input
                 type='file'
                 accept='image/*'
                 multiple
-                required
+                required={!cover}
                 onChange={e => setCover(e.target.files[0])}
               />
+              {
+                cover && (
+                  <div className="image_preview">
+                  <img src={`https://realauto.limsa.uz/api/uploads/images/${cover}`} alt="Existing Category" style={{ width: "100px", height: "auto" }} />
+                </div>
+                )
+              } */}
+
+<input
+      required={!currentimg}
+      onChange={e => setImg(e.target.files[0])}
+      accept='image/*'
+      multiple
+      type='file'
+    />
+    {
+      currentimg && (
+        <div className="image_preview">
+          <img
+            src={`https://realauto.limsa.uz/api/uploads/images/${currentimg}`}
+            alt="Existing Category"
+            style={{ width: "100px", height: "auto" }}
+          />
+        </div>
+      )
+    }
+
+    <input
+      type='file'
+      accept='image/*'
+      multiple
+      required={!cover}
+      onChange={e => setCover(e.target.files[0])}
+    />
+    {
+      cover && (
+        <div className="image_preview">
+          <img
+            src={`https://realauto.limsa.uz/api/uploads/images/${cover}`}
+            alt="Cover Image"
+            style={{ width: "100px", height: "auto" }}
+          />
+        </div>
+      )
+    }
             </div>
             <button type='submit'>Submit</button>
           </form>
