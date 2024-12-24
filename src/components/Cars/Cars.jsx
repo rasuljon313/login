@@ -34,7 +34,7 @@ const Cars = () => {
   const [premiumUS, setPremiumUS] = useState('')
   const [inclusive, setInclusive] = useState(false)
 
-const [currentimg, setcurrentimg] = useState("")
+// const [currentimg, setcurrentimg] = useState("")
 const [editCategoryId, setEditCategoryId] = useState(null)
 
   const [imgID, setImg] = useState(null)
@@ -114,7 +114,7 @@ const [editCategoryId, setEditCategoryId] = useState(null)
     formdata.append('cover', cover)
     if(imgID) formdata.append('images', imgID)
 
-      const apiUrl = editCategoryId ? `https://realauto.limsa.uz/api/cities/${editCategoryId}` : "https://realauto.limsa.uz/api/cities";
+      const apiUrl = editCategoryId ? `https://realauto.limsa.uz/api/cars/${editCategoryId}` : "https://realauto.limsa.uz/api/cars";
       const method = editCategoryId ? "PUT" : "POST";
     fetch( apiUrl, {
       method: method,
@@ -135,7 +135,7 @@ const [editCategoryId, setEditCategoryId] = useState(null)
         setModelID("");
         setBrandId("");
         setImg(null);
-        setcurrentimg("")
+        // setcurrentimg("")
         setEditCategoryId(null);
       } else {
         console.error("Error:", data.message);
@@ -146,9 +146,11 @@ const [editCategoryId, setEditCategoryId] = useState(null)
   // const confirmDeleteCategory = (id, name_en) => {
    
   // }
+  // console.log(editCategoryId);
+  
   const editCategory = (item) => {
     setOpenC(true)
-    setEditCategoryId(item?.id)
+    setEditCategoryId(item.id)
    setColor(item?.color)
    setYear(item?.year)
    setMaxspeed(item?.max_speed)
@@ -165,10 +167,15 @@ const [editCategoryId, setEditCategoryId] = useState(null)
    setPremiumU(item?.price_in_usd)
    setPremiumAS(item?.price_in_aed_sale)
    setPremiumUS(item?.price_in_usd_sale)
-   setcurrentimg(item?.images)
-   setCover(item?.cover)
+//  setcurrentimg(
+//     item?.car_images?.map((img) => console.log(img.image.src))
+//   );
+
+   setCover(item?.cover || "")
    setImg(null)
   }
+
+// console.log(currentimg);
 
   return (
     <div>
@@ -204,7 +211,6 @@ const [editCategoryId, setEditCategoryId] = useState(null)
             </ul>
 
             {saveCars?.map(item => (  
-              // console.log(item)
               <section className="cars_list_box" key={item.id}>
                 <div className="cars_list_card">
                 <img className='cars_inbrandimg' src={`https://realauto.limsa.uz/api/uploads/images/${item.brand.image_src}`} alt={item.brand.title} />
@@ -273,7 +279,7 @@ const [editCategoryId, setEditCategoryId] = useState(null)
         premiumu={premiumu}
         premiumAS={premiumAS}
         premiumUS={premiumUS}
-        currentimg={currentimg}
+        // currentimg={currentimg}
         cover={cover}
         color={color}
           setCover={setCover}

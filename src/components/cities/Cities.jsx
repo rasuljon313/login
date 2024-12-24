@@ -116,7 +116,7 @@ const Cityes = () => {
   };
 
   const editCategory = (item) => {
-    setEditCategoryId(item.id);
+    setEditCategoryId(item);
     setName(item.name);
     setText(item.text);
     setImg(null); 

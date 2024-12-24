@@ -33,8 +33,8 @@ const CModal = ({
   setColor,
   saveCategories,
   setCategoryID,
-  cover,
-  currentimg,
+  // cover,
+  // currentimg,
   premiumUS,
   premiumAS,
   premiumu,
@@ -52,19 +52,58 @@ const CModal = ({
   year,
   editCategoryId
 }) => {
-  console.log(cover, currentimg);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setOpenC(false)
     pushApiC(e);
+    setColor("")
+setYear("")
+setSecond("")
+setMaxspeed("")
+setMaxpeople("")
+setTransmission("")
+setMator("")
+setDrives("")
+setPetrol("") 
+setLimitp("") 
+setDeposit("") 
+setPremiumP("") 
+setPremiumA("") 
+setPremiumU("") 
+setPremiumAS("") 
+setPremiumUS("") 
+setImg("") 
+setCover("") 
   };
+
+  const a = () => {
+    setOpenC(false)
+    setColor("")
+    setYear("")
+    setSecond("")
+    setMaxspeed("")
+    setMaxpeople("")
+    setTransmission("")
+    setMator("")
+    setDrives("")
+    setPetrol("") 
+    setLimitp("") 
+    setDeposit("") 
+    setPremiumP("") 
+    setPremiumA("") 
+    setPremiumU("") 
+    setPremiumAS("") 
+    setPremiumUS("") 
+    setImg("") 
+    setCover("") 
+  }
   
   return (
     <div>
       <div className='modal_overlay'>
         <div className='modal_content'>
-          <button className='modal_close' onClick={() => setOpenC(false)}>
+          <button className='modal_close' onClick={a}>
             <IoIosCloseCircleOutline />
           </button>
           <form onSubmit={handleSubmit}>
@@ -269,72 +308,43 @@ const CModal = ({
                 value={premiumUS}
                 placeholder='USD sale'
               />
-              {/* <input
-                required={!currentimg}
+              <input 
+                // required={!currentimg}
+                required
                 onChange={e => setImg(e.target.files[0])}
                 accept='image/*'
-                multiple
+                id='img'
                 type='file'
               />
-              {
+              {/* {
                 currentimg && (
                   <div className="image_preview">
-                  <img src={`https://realauto.limsa.uz/api/uploads/images/${currentimg}`} alt="Existing Category" style={{ width: "100px", height: "auto" }} />
+                    {
+                      currentimg?.map(item=>(
+                        // console.log(item)
+                        // <img key={item} src={`https://realauto.limsa.uz/api/uploads/images/${item?.car_id?.image}`} alt="Existing Category" style={{ width: "100px", height: "auto" }} />
+                        <img key={item} src={`https://realauto.limsa.uz/api/uploads/images/${item?.image?.src}`}  alt="Existing Category" style={{ width: "100px", height: "auto" }} />
+                      ))
+                    }
                 </div>
                 )
-              }
+              } */}
               <input
                 type='file'
                 accept='image/*'
                 multiple
-                required={!cover}
+                id='cover'
+                // required={!cover}
+                required
                 onChange={e => setCover(e.target.files[0])}
               />
-              {
+              {/* {
                 cover && (
                   <div className="image_preview">
                   <img src={`https://realauto.limsa.uz/api/uploads/images/${cover}`} alt="Existing Category" style={{ width: "100px", height: "auto" }} />
                 </div>
                 )
               } */}
-
-<input
-      required={!currentimg}
-      onChange={e => setImg(e.target.files[0])}
-      accept='image/*'
-      multiple
-      type='file'
-    />
-    {
-      currentimg && (
-        <div className="image_preview">
-          <img
-            src={`https://realauto.limsa.uz/api/uploads/images/${currentimg}`}
-            alt="Existing Category"
-            style={{ width: "100px", height: "auto" }}
-          />
-        </div>
-      )
-    }
-
-    <input
-      type='file'
-      accept='image/*'
-      multiple
-      required={!cover}
-      onChange={e => setCover(e.target.files[0])}
-    />
-    {
-      cover && (
-        <div className="image_preview">
-          <img
-            src={`https://realauto.limsa.uz/api/uploads/images/${cover}`}
-            alt="Cover Image"
-            style={{ width: "100px", height: "auto" }}
-          />
-        </div>
-      )
-    }
             </div>
             <button type='submit'>Submit</button>
           </form>
