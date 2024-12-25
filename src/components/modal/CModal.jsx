@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { IoIosCloseCircleOutline } from 'react-icons/io'
 
-const CModal = ({color,setOpenC,pushApiC,setYear,setMaxspeed,location,setCover,setLocationID,setPremiumP,setPremiumA,setPremiumAS,setPremiumUS,setPremiumU,setDeposit,setPetrol,setLimitp,setDrives,setMator,setTransmission,setMaxpeople,saveModels,setSecond,setImg,setCityID,saveCity,saveBrand,setBrandId,setModelID,setColor,saveCategories,setCategoryID,premiumUS,premiumAS,premiumu,premiuma,premiump,deposit,limitperday,petrol,driveSide,setMatorID,transmissionID,maxpeopleID,maxspeedID,second,year,editCategoryId
+const CModal = ({color,setOpenC,pushApiC,setYear,setMaxspeed,location,setCover,setLocationID,setPremiumP,setPremiumA,setPremiumAS,setPremiumUS,setPremiumU,setDeposit,setPetrol,setLimitp,setDrives,setMator,setTransmission,setMaxpeople,saveModels,setSecond,setImg,setCityID,saveCity,saveBrand,setBrandId,setModelID,setColor,saveCategories,setCategoryID,premiumUS,premiumAS,premiumu,premiuma,premiump,deposit,limitperday,petrol,driveSide,setMatorID,transmissionID,maxpeopleID,maxspeedID,second,year,editCategoryId,brandID
   // cover,
   // currentimg,
 }) => {
@@ -10,6 +10,7 @@ const CModal = ({color,setOpenC,pushApiC,setYear,setMaxspeed,location,setCover,s
 e.preventDefault();
 setOpenC(false)
 pushApiC(e);
+setBrandId(null)
 setColor("")
 setYear("")
 setSecond("")
@@ -33,6 +34,7 @@ setCover("") };
     e.preventDefault();
     pushApiC(e);
     setOpenC(false)
+    setBrandId(null)
     setColor("")
     setYear("")
     setSecond("")
@@ -52,6 +54,7 @@ setCover("") };
     setImg("") 
     setCover("") 
   }
+  console.log(brandID);
   
   return (
     <div>
@@ -63,16 +66,21 @@ setCover("") };
           <form onSubmit={handleSubmit}>
             <h2 className='modal_title'>{`${editCategoryId ? "edit" :" Add Model"}`}</h2>
             <div className='modal_box'>
-              <select
-                name='chose'
-                onChange={e => setBrandId(e.target.value)}
-                aria-label='Choose a brand'
-                required
-              >
-                <option value='' disabled selected>
-                  Select a brand
+
+              <select name='chose' onChange={ (e) => setBrandId(e.target.value)} aria-label='Choose a brand' required value={""} >
+                  {
+                    brandID && (
+                      <option value="" disabled>
+                      {brandID}
+                   </option>
+                    )
+                  }
+                  
+                <option value="" disabled >
+                Select a brand
                 </option>
-                {saveBrand?.map(item => (
+
+                {saveBrand?.map((item) => (
                   <option key={item.id} value={item.id}>
                     {item.title}
                   </option>

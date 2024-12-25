@@ -39,7 +39,7 @@ const Cars = () => {
 
   const [imgID, setImg] = useState(null)
   const [cover, setCover] = useState('')
-  const [brandID, setBrandId] = useState('')
+  const [brandID, setBrandId] = useState(null)
   const [categoryID, setCategoryID] = useState('')
   const [modelID, setModelID] = useState('')
   const [cityID, setCityID] = useState('')
@@ -197,6 +197,10 @@ const Cars = () => {
   };
   
   const editCategory = (item) => {
+    {
+      console.log(item);
+      
+    }
     setOpenC(true)
     setEditCategoryId(item.id)
    setColor(item?.color)
@@ -215,6 +219,8 @@ const Cars = () => {
    setPremiumU(item?.price_in_usd)
    setPremiumAS(item?.price_in_aed_sale)
    setPremiumUS(item?.price_in_usd_sale)
+
+   setBrandId(item?.brand.title)
 //  setcurrentimg(
 //     item?.car_images?.map((img) => console.log(img.image.src))
 //   );
@@ -365,6 +371,7 @@ setDeleteModalOpen(true);
           saveCategories={saveCategories}
           pushApiC={pushApiC}
           setBrandId={setBrandId}
+          brandID={brandID}
           setCategoryID={setCategoryID}
           setColor={setColor}
           setOpenC={setOpenC}
