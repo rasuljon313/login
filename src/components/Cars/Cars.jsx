@@ -40,7 +40,7 @@ const Cars = () => {
   const [imgID, setImg] = useState(null)
   const [cover, setCover] = useState('')
   const [brandID, setBrandId] = useState(null)
-  const [categoryID, setCategoryID] = useState(null)
+  const [categoryID, setCategoryID] = useState("")
   const [currentimg, setcurrentimg] = useState("")
   
   const [modelID, setModelID] = useState('')
@@ -78,7 +78,6 @@ const Cars = () => {
       .then(res => res.json())
       .then(elem => setSaveCars(elem?.data))
   }
-
   useEffect(() => {
     getBrand()
     getCar()
@@ -87,6 +86,7 @@ const Cars = () => {
     getLocation()
     getCategory()
   }, [])
+console.log(currentimg);
 
   const pushApiC = (e) => {
     e.preventDefault();
@@ -136,7 +136,7 @@ const Cars = () => {
         setCityID("");
         setModelID("");
         setBrandId("");
-        setImg(null);
+        setImg(null);setCategoryID("")
         // setcurrentimg("")
         setEditCategoryId("");
       } else {
@@ -217,9 +217,11 @@ const Cars = () => {
    setPremiumU(item?.price_in_usd)
    setPremiumAS(item?.price_in_aed_sale)
    setPremiumUS(item?.price_in_usd_sale)
-   
-   setBrandId(item?.brand.id);
-   setCategoryID(item?.category.id);
+   setModelID(item?.model.id)
+   setBrandId(item?.brand?.id);
+   setLocationID(item?.location?.id)
+   setCityID(item?.city?.id);
+   setCategoryID(item?.category?.id);
  setcurrentimg(
     item?.car_images?.map((img) =>{ return img.image.src})
   );
@@ -232,8 +234,6 @@ setDelateID(id?.id)
 setDelateName(id?.category?.name_en)
 setDeleteModalOpen(true);
 }
-console.log(currentimg);
-
   return (
     <div>
       <Nav setOpenC={setOpenC} />
@@ -377,6 +377,9 @@ console.log(currentimg);
           setColor={setColor}
           setOpenC={setOpenC}
           saveBrand={saveBrand}
+          modelID={modelID}
+cityID={cityID}
+locationID={locationID}
         />
       )}
       {
