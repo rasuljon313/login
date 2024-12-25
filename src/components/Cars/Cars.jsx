@@ -42,6 +42,7 @@ const Cars = () => {
   const [brandID, setBrandId] = useState(null)
   const [categoryID, setCategoryID] = useState("")
   const [currentimg, setcurrentimg] = useState("")
+  const [i, setI] = useState("")
   
   const [modelID, setModelID] = useState('')
   const [cityID, setCityID] = useState('')
@@ -198,8 +199,11 @@ const Cars = () => {
   };
   
   const editCategory = (item) => {
-    console.log(item)
-    
+    // {
+    //   console.log(item.inclusive);
+      
+    // }
+    setI(item.inclusive)
     setOpenC(true)
     setEditCategoryId(item.id)
    setColor(item?.color)
@@ -235,6 +239,8 @@ setDelateID(id?.id)
 setDelateName(id?.category?.name_en)
 setDeleteModalOpen(true);
 }
+
+console.log(currentimg);
 
   return (
     <div>
@@ -326,6 +332,8 @@ setDeleteModalOpen(true);
 
       {openC && (
         <CModal
+        setI={setI}
+        i={i}
         imgID={imgID}
         editCategoryId={editCategoryId}
         categoryID={categoryID}
