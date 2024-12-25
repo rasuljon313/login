@@ -199,10 +199,6 @@ const Cars = () => {
   };
   
   const editCategory = (item) => {
-    // {
-    //   console.log(item.inclusive);
-      
-    // }
     setI(item.inclusive)
     setOpenC(true)
     setEditCategoryId(item.id)

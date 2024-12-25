@@ -18,7 +18,6 @@ const CModal = ({
     e.preventDefault();
     setOpenC(false);
     pushApiC(e);
-    // Reset all values after submit
     setModelID("")
     setLocationID("")
     setCityID("")
@@ -74,9 +73,6 @@ setCategoryID("")
     setCover("");
   };
 console.log(imgID);
-// console.log(i);
-
-
   return (
     <div>
       <div className='modal_overlay'>
@@ -140,18 +136,12 @@ console.log(imgID);
                 ))}
               </select>
 
-
-              <select value={i === true ? 'true' : i === false ? 'false' : ''} onChange={(e) => setI(e.target.value)}>
+<select value={i === true ? 'true' : i === false ? 'false' : ''} onChange={(e) => setI(e.target.value === 'true')}>
   <option value="">Select inclusive</option>
   <option value="true">true</option>
   <option value="false">false</option>
 </select>
 
-              {/* <select>
-                <option value="">Select inclusive</option>
-                <option value="true">true</option>
-                <option value="false">false</option>
-              </select> */}
 
               <input value={color} onChange={(e) => setColor(e.target.value)} required type='text' placeholder='Car color' />
               <input value={year} onChange={(e) => setYear(e.target.value)} required type='number' placeholder='Car year' />
