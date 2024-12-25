@@ -86,7 +86,6 @@ const Cars = () => {
     getLocation()
     getCategory()
   }, [])
-console.log(currentimg);
 
   const pushApiC = (e) => {
     e.preventDefault();
@@ -199,6 +198,8 @@ console.log(currentimg);
   };
   
   const editCategory = (item) => {
+    console.log(item)
+    
     setOpenC(true)
     setEditCategoryId(item.id)
    setColor(item?.color)
@@ -234,6 +235,7 @@ setDelateID(id?.id)
 setDelateName(id?.category?.name_en)
 setDeleteModalOpen(true);
 }
+
   return (
     <div>
       <Nav setOpenC={setOpenC} />
