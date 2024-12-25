@@ -2,13 +2,10 @@ import Nav from '../../components/nav/Nav'
 import Sidebar from '../../components/bar/Sidebar'
 import { useEffect, useState } from 'react'
 import CModal from '../modal/CModal'
-// import { CiSquareQuestion } from 'react-icons/ci'
 import { BsQuestionCircleFill } from 'react-icons/bs'
 import { IoPencil } from 'react-icons/io5'
 import { ImBin } from 'react-icons/im'
 import Delate from '../modal/Delate'
-// import { ImBin } from 'react-icons/im'
-// import { IoPencil } from 'react-icons/io5'
 
 const Cars = () => {
   const [saveBrand, setSaveBrand] = useState([])
@@ -38,10 +35,7 @@ const Cars = () => {
   const [delateNameC, setDelateName] = useState("")
   const [delatModalopen, setDeleteModalOpen] = useState("")
   const [delateID, setDelateID] = useState("")
-
-
-// const [currentimg, setcurrentimg] = useState("")
-const [editCategoryId, setEditCategoryId] = useState(null)
+  const [editCategoryId, setEditCategoryId] = useState()
 
   const [imgID, setImg] = useState(null)
   const [cover, setCover] = useState('')
@@ -142,18 +136,13 @@ const [editCategoryId, setEditCategoryId] = useState(null)
         setBrandId("");
         setImg(null);
         // setcurrentimg("")
-        setEditCategoryId(null);
+        setEditCategoryId("");
       } else {
         console.error("Error:", data.message);
       }
     })
     .catch((err) => console.error("Error:", err));
   }
-  // const confirmDeleteCategory = (id, name_en) => {
-   
-  // }
-  // console.log(editCategoryId);
-
   const deleteCarscategory = () => {
       {
         delateID &&
@@ -171,29 +160,29 @@ const [editCategoryId, setEditCategoryId] = useState(null)
               setDelateID(null);
               setDelateName("");
               setSaveBrand([])
-setSaveCars([])
-setSaveModels([])
-setSaveCategories([])
-setSaveCity([])
-setLocation
-setColor("")
-setYear("")
-setSecond("")
-setMaxspeed("")
-setMaxpeople("")
-setTransmission("")
-setMator("")
-setDrives("")
-setPetrol("") 
-setLimitp("") 
-setDeposit("") 
-setPremiumP("") 
-setPremiumA("") 
-setPremiumU("") 
-setPremiumAS("") 
-setPremiumUS("") 
-setImg("") 
-setCover("") 
+              setSaveCars([])
+              setSaveModels([])
+              setSaveCategories([])
+              setSaveCity([])
+              setLocation
+              setColor("")
+              setYear("")
+              setSecond("")
+              setMaxspeed("")
+              setMaxpeople("")
+              setTransmission("")
+              setMator("")
+              setDrives("")
+              setPetrol("") 
+              setLimitp("") 
+              setDeposit("") 
+              setPremiumP("") 
+              setPremiumA("") 
+              setPremiumU("") 
+              setPremiumAS("") 
+              setPremiumUS("") 
+              setImg("") 
+              setCover("") 
             }
           })
           .catch((error) => {
@@ -234,7 +223,6 @@ setCover("")
    setImg(null)
   }
 
-// console.log(currentimg);
 const confirmDeleteCategory = (id) => {
 setDelateID(id?.id)
 setDelateName(id?.category?.name_en)
