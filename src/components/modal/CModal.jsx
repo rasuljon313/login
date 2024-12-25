@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { IoIosCloseCircleOutline } from 'react-icons/io'
 
-const CModal = ({color,setOpenC,pushApiC,setYear,setMaxspeed,location,setCover,setLocationID,setPremiumP,setPremiumA,setPremiumAS,setPremiumUS,setPremiumU,setDeposit,setPetrol,setLimitp,setDrives,setMator,setTransmission,setMaxpeople,saveModels,setSecond,setImg,setCityID,saveCity,saveBrand,setBrandId,setModelID,setColor,saveCategories,setCategoryID,premiumUS,premiumAS,premiumu,premiuma,premiump,deposit,limitperday,petrol,driveSide,setMatorID,transmissionID,maxpeopleID,maxspeedID,second,year,editCategoryId,brandID
+const CModal = ({color,setOpenC,pushApiC,setYear,setMaxspeed,location,setCover,setLocationID,setPremiumP,setPremiumA,setPremiumAS,setPremiumUS,setPremiumU,setDeposit,setPetrol,setLimitp,setDrives,setMator,setTransmission,setMaxpeople,saveModels,setSecond,setImg,setCityID,saveCity,saveBrand,setBrandId,setModelID,setColor,saveCategories,setCategoryID,premiumUS,premiumAS,premiumu,premiuma,premiump,deposit,limitperday,petrol,driveSide,setMatorID,transmissionID,maxpeopleID,maxspeedID,second,year,editCategoryId,brandID,imgID
   // cover,
   // currentimg,
 }) => {
@@ -54,8 +54,7 @@ setCover("") };
     setImg("") 
     setCover("") 
   }
-  console.log(brandID);
-  
+
   return (
     <div>
       <div className='modal_overlay'>
@@ -66,26 +65,17 @@ setCover("") };
           <form onSubmit={handleSubmit}>
             <h2 className='modal_title'>{`${editCategoryId ? "edit" :" Add Model"}`}</h2>
             <div className='modal_box'>
-
-              <select name='chose' onChange={ (e) => setBrandId(e.target.value)} aria-label='Choose a brand' required value={""} >
-                  {
-                    brandID && (
-                      <option value="" disabled>
-                      {brandID}
-                   </option>
-                    )
-                  }
-                  
-                <option value="" disabled >
-                Select a brand
-                </option>
-
-                {saveBrand?.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.title}
-                  </option>
-                ))}
-              </select>
+<select
+  value={brandID} 
+  onChange={(e) => setBrandId(e.target.value)} 
+>
+  <option value="">Select Brand</option>
+  {saveBrand.map((brand) => (
+    <option key={brand.id} value={brand.id}>
+      {brand.title}
+    </option>
+  ))}
+</select>
 
               <select name='chose' onChange={e => setModelID(e.target.value)} aria-label='Choose a model' required >
                 <option value='' disabled selected>
@@ -152,6 +142,11 @@ setCover("") };
       <input required onChange={e => setPremiumAS(e.target.value)} type='number' value={premiumAS} placeholder='AED sale' />
       <input required onChange={e => setPremiumUS(e.target.value)} type='number' value={premiumUS} placeholder='USD sale' />
       <input  required onChange={e => setImg(e.target.files[0])} accept='image/*' type='file'/>
+      {
+        console.log(imgID)
+        
+      }
+      <input type='file' accept='image/*' required onChange={e => setCover(e.target.files[0])}/>
               {/* {
                 currentimg && (
                   <div className="image_preview">
@@ -165,7 +160,6 @@ setCover("") };
                 </div>
                 )
               } */}
-              <input type='file' accept='image/*' required onChange={e => setCover(e.target.files[0])}/>
               {/* {
                 cover && (
                   <div className="image_preview">
