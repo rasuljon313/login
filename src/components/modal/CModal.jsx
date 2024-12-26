@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+// /* eslint-disable react/prop-types */
 import { IoIosCloseCircleOutline } from 'react-icons/io'
 
 const CModal = ({
@@ -16,8 +17,8 @@ const CModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setOpenC(false);
     pushApiC(e);
+    setOpenC(false);
     setModelID("")
     setLocationID("")
     setCityID("")
@@ -69,7 +70,8 @@ setCategoryID("")
     setPremiumAS("");
     setPremiumUS("");
     setImg("");
-    setI(""); 
+    // setI(""); 
+    setI(null);
     setCover("");
   };
 console.log(imgID);
@@ -136,7 +138,7 @@ console.log(imgID);
                 ))}
               </select>
 
-<select value={i === true ? 'true' : i === false ? 'false' : ''} onChange={(e) => setI(e.target.value === 'true')}>
+<select value={i === true ? 'true' : i === false ? 'false' : ''} onChange={(e) => setI(e.target.value === 'true' ? true : e.target.value === 'false' ? false : null)}>
   <option value="">Select inclusive</option>
   <option value="true">true</option>
   <option value="false">false</option>

@@ -31,7 +31,6 @@ const Cars = () => {
   const [premiumAS, setPremiumAS] = useState('')
   const [premiumu, setPremiumU] = useState('')
   const [premiumUS, setPremiumUS] = useState('')
-  const [inclusive, setInclusive] = useState(false)
   const [delateNameC, setDelateName] = useState("")
   const [delatModalopen, setDeleteModalOpen] = useState("")
   const [delateID, setDelateID] = useState("")
@@ -41,7 +40,7 @@ const Cars = () => {
   const [cover, setCover] = useState('')
   const [brandID, setBrandId] = useState(null)
   const [categoryID, setCategoryID] = useState("")
-  const [currentimg, setcurrentimg] = useState("")
+  // const [currentimg, setcurrentimg] = useState("")
   const [i, setI] = useState("")
   
   const [modelID, setModelID] = useState('')
@@ -112,10 +111,15 @@ const Cars = () => {
     formdata.append('price_in_usd', premiumu)
     formdata.append('price_in_aed_sale', premiumAS)
     formdata.append('price_in_usd_sale', premiumUS)
-    formdata.append('inclusive', inclusive)
+    // formdata.append('inclusive', inclusive)
     formdata.append('cover', cover)
     if(imgID) formdata.append('images', imgID)
 
+      if (i === true || i === false) {
+        formdata.append('inclusive', i); 
+    } else {
+        formdata.append('inclusive', null); 
+    }
       const apiUrl = editCategoryId ? `https://realauto.limsa.uz/api/cars/${editCategoryId}` : "https://realauto.limsa.uz/api/cars";
       const method = editCategoryId ? "PUT" : "POST";
     fetch( apiUrl, {
@@ -160,31 +164,6 @@ const Cars = () => {
               getCar();
               setDeleteModalOpen(false);
               setDelateID(null);
-              setDelateName("");
-              setSaveBrand([])
-              setSaveCars([])
-              setSaveModels([])
-              setSaveCategories([])
-              setSaveCity([])
-              setLocation
-              setColor("")
-              setYear("")
-              setSecond("")
-              setMaxspeed("")
-              setMaxpeople("")
-              setTransmission("")
-              setMator("")
-              setDrives("")
-              setPetrol("") 
-              setLimitp("") 
-              setDeposit("") 
-              setPremiumP("") 
-              setPremiumA("") 
-              setPremiumU("") 
-              setPremiumAS("") 
-              setPremiumUS("") 
-              setImg("") 
-              setCover("") 
             }
           })
           .catch((error) => {
@@ -199,7 +178,7 @@ const Cars = () => {
   };
   
   const editCategory = (item) => {
-    setI(item.inclusive)
+    setI(item.inclusive);
     setOpenC(true)
     setEditCategoryId(item.id)
    setColor(item?.color)
@@ -223,11 +202,11 @@ const Cars = () => {
    setLocationID(item?.location?.id)
    setCityID(item?.city?.id);
    setCategoryID(item?.category?.id);
- setcurrentimg(
-    item?.car_images?.map((img) =>{ return img.image.src})
-  );
+//  setcurrentimg(
+//     item?.car_images?.map((img) =>{ return img.image.src})
+//   );
 
-   setCover(item?.cover || "")
+  //  setCover(item?.cover || "")
   }
 
 const confirmDeleteCategory = (id) => {
@@ -236,7 +215,7 @@ setDelateName(id?.category?.name_en)
 setDeleteModalOpen(true);
 }
 
-console.log(currentimg);
+// console.log(currentimg);
 
   return (
     <div>
@@ -352,7 +331,6 @@ console.log(currentimg);
         cover={cover}
         color={color}
           setCover={setCover}
-          setInclusive={setInclusive}
           setLocationID={setLocationID}
           location={location}
           setPremiumUS={setPremiumUS}
